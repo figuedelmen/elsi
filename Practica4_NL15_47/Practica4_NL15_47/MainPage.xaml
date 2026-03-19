@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica4_NL15_47.MainPage">
+    <Grid>
+
+        <Border StrokeShape="RoundRectangle 30"
+            BackgroundColor="#2b2c30"
+            Padding="20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="350"
+            HeightRequest="400">
+
+            <Border.Shadow>
+                <Shadow
+                    Brush="Black"
+                    Offset="10,10"
+                    Radius="15"
+                    Opacity="0.5" />    
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="20">
+
+                <Grid>
+                    <Entry x:Name="TexNumero1"
+                       TextColor="White"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       Placeholder="Numero1"
+                       HeightRequest="40"/>
+                </Grid>
+
+                <Grid>
+                    <Entry x:Name="TexNumero2"
+                       TextColor="White"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       Placeholder="Numero2"
+                       HeightRequest="40"/>
+                </Grid>
+
+                <Grid>
+                    <Picker x:Name="pickerOperacion"
+                            Title="Operacion">
+                        <Picker.Items>
+                            <x:String>Sumar</x:String>
+                            <x:String>Restar</x:String>
+                            <x:String>Multiplicar</x:String>
+                            <x:String>Dividir</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Grid>
+
+                <Button Text="OPERAR"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    BorderColor="White"
+                    ContentLayout="Left, 10"
+                    HeightRequest="40"
+                    WidthRequest="200"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Margin="0,10,0,0"
+                    Clicked="BtnSumar_Clicked"/>
+
+                <Label Text="Resultado"
+                       x:Name="TexResultado"
+                       TextColor="#1E90FF"
+                       HorizontalOptions="Center">
+                </Label>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+    </Grid>
+
+</ContentPage>

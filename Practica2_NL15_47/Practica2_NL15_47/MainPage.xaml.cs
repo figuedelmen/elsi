@@ -29,7 +29,6 @@
 
                 TexResultado.Text = suma.ToString();
             }
-
         }
     }
 }

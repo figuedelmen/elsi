@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica7_NL15_47.MainPage">
+
+    <Grid>
+        <Border StrokeShape="RoundRectangle 30"
+                BackgroundColor="#2b2c30"
+                Padding="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="350"
+                HeightRequest="400">
+
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                        Offset="10,10"
+                        Radius="15"
+                        Opacity="0.5"/>
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="20">
+                <Grid>
+                    <Entry TextColor="White"
+                           Keyboard="Chat"
+                           x:Name="TexNombre"
+                           Placeholder="Nombre"/>
+                </Grid>
+                <Grid>
+                    <Entry TextColor="White"
+                           IsPassword="True"
+                           Keyboard="Numeric"
+                           x:Name="TexCodigo"
+                           Placeholder="Codigo"/>
+                </Grid>
+
+                <Button CornerRadius="15"
+                        Text="Verificar"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        Clicked="Button_Clicked"/>
+
+                <Label Text=""
+                       HorizontalOptions="Center"
+                       x:Name="LbVerificacion"/>
+            </VerticalStackLayout>
+            
+        </Border>
+    </Grid>
+
+</ContentPage>

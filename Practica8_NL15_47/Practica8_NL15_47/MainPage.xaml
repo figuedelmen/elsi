@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica8_NL15_47.MainPage">
+
+
+    <Grid>
+        <Border StrokeShape="RoundRectangle 30"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Padding="20"
+                WidthRequest="350"
+                HeightRequest="400"
+                BackgroundColor="#2b2c30">
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                        Offset="10,10"
+                        Radius="15"
+                        Opacity="0.5"/>
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="30">
+                <Grid>
+                    <Entry x:Name="TexCodigo"
+                           TextColor="White"
+                           Keyboard="Chat"
+                           BackgroundColor="Transparent"
+                           Placeholder="Ingresar Clave"/>
+                </Grid>
+
+                <Button Text="Verificar"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        BorderWidth="1"
+                        BorderColor="White"
+                        x:Name="BtnVerificar"
+                        Clicked="BtnVerificar_Clicked"/>
+
+            </VerticalStackLayout>
+            
+        </Border>
+    </Grid>
+
+</ContentPage>

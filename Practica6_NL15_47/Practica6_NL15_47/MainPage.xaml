@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica6_NL15_47.MainPage">
+
+    <Grid>
+        <Border StrokeShape="RoundRectangle 30"
+                BackgroundColor="#2b2c30"
+                Padding="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="350"
+                HeightRequest="300">
+
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                        Offset="10,10"
+                        Radius="15"
+                        Opacity="0.5"/>
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="40">
+
+                <Label Text="Cual es el numero que vio?"
+                       HorizontalOptions="Center"/>
+
+                <Grid>
+                    <Entry x:Name="TexNumero"
+                           TextColor="White"
+                           Keyboard="Numeric"
+                           BackgroundColor="Transparent"
+                           Placeholder="Numero"
+                           HeightRequest="40"/>
+                </Grid>
+
+                <Button x:Name="BtnControlar"
+                        Text="Controlar"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        CornerRadius="15"
+                        BorderWidth="1"
+                        BorderColor="white"
+                        Clicked="BtnControlar_Clicked"/>
+
+                <Label Text="Numero"
+                       HorizontalOptions="Center"
+                       x:Name="LbNumero"/>
+
+            </VerticalStackLayout>
+            
+        </Border>
+    </Grid>
+
+</ContentPage>
