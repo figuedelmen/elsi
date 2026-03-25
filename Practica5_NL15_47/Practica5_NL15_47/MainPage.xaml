@@ -3,12 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Practica5_NL15_47.MainPage">
 
-    <Grid BackgroundColor="White">
-        <ImageButton x:Name="BtnImage"
-                     Source="telefono.png"
-                     Clicked="BtnImage_Clicked"
-                     WidthRequest="200"
-                     HeightRequest="200"/>
+    <Grid BackgroundColor="White"
+          RowDefinitions="80,1*">
+
+        <Label x:Name="TexPoblacion"
+               TextColor="Black"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+               Grid.Row="0"/>
+
+        <CollectionView ItemsSource="{Binding ListaPaises}"
+                        Grid.Row="1"
+                        x:Name="ListPais"
+                        SelectionMode="Single"
+                        SelectionChanged="ListPais_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border StrokeShape="RoundRectangle 30"
+                                BackgroundColor="White"
+                                Padding="20"
+                                Margin="5"
+                                HeightRequest="60"
+                                StrokeThickness="0">
+
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="Black"
+                                    Offset="3,3"
+                                    Radius="10"
+                                    Opacity="0.5" />
+                            </Border.Shadow>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold" TextColor="Black"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 
 </ContentPage>
