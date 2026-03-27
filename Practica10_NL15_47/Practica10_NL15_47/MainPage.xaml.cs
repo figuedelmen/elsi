@@ -8,23 +8,14 @@
             InitializeComponent();
         }
 
-        private void BtnVer_Clicked(object sender, EventArgs e)
+        private async void BtnVer_Clicked(object sender, EventArgs e)
         {
             var texUrl = TexUrl.Text;
+            var segundaPantalla = new SegundaVentana();
 
-            var segundaPantalla = new SegundaPantalla();
+            segundaPantalla.UrlDestino = texUrl;
 
-            var paginaContenedora = new ContentPage
-            {
-                Title = "Vista Externa",
-                Content = segundaPantalla
-            };
-
-            segundaPantalla.BindingContext = new { ValorRecibido = texUrl };
-
-            var nuevaVentana = new Window(paginaContenedora);
-
-            Application.Current.OpenWindow(nuevaVentana);
+            await Navigation.PushAsync(segundaPantalla);
         }
     }
 }

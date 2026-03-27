@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica10_NL15_47.SegundaVentana"
+             Title="SegundaVentana">
+
+    <Border StrokeShape="RoundRectangle 30"
+             Margin="10"
+             VerticalOptions="Fill"
+             HorizontalOptions="Fill">
+        <Border.Shadow>
+            <Shadow Brush="Black"
+                     Offset="10,10"
+                     Radius="15"
+                     Opacity="0.5"/>
+        </Border.Shadow>
+
+        <WebView x:Name="Web"
+                 HorizontalOptions="Fill" 
+                 VerticalOptions="Fill" />
+
+    </Border>
+
+</ContentPage>
