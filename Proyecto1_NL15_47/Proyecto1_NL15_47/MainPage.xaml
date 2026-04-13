@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto1_NL15_47.MainPage">
+
+
+        <Grid VerticalOptions="Center" HorizontalOptions="Center" Padding="30">
+
+            <Border BackgroundColor="#1E1E1E"
+                Stroke="White"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 30"
+                WidthRequest="300"
+                HeightRequest="350">
+
+                <Border.Shadow>
+                    <Shadow Brush="White"
+                        Offset="0,0" 
+                        Radius="10"
+                        Opacity="0.4" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="25" Padding="20" VerticalOptions="Center">
+
+                    <Label Text="INICIO DE SESION"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+
+                    <Grid>
+                        <Entry x:Name="TexNombre"
+                               Placeholder="Nombre"
+                               Keyboard="Chat"
+                               TextColor="White"/>
+                    </Grid>
+
+                    <Grid>
+                        <Entry x:Name="TexContraseña"
+                               Placeholder="Contraseña"
+                               Keyboard="Password"
+                               TextColor="White"/>
+                    </Grid>
+
+                    <Button x:Name="BtnIniciarSesion"
+                            BackgroundColor="Transparent"
+                            Text="Iniciar Sesion"
+                            TextColor="White"
+                            BorderColor="White"
+                            BorderWidth="1"/>
+
+
+                </VerticalStackLayout>
+            </Border>
+    </Grid>
+
+</ContentPage>
