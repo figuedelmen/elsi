@@ -45,7 +45,8 @@
                             Text="Iniciar Sesion"
                             TextColor="White"
                             BorderColor="White"
-                            BorderWidth="1"/>
+                            BorderWidth="1"
+                            Clicked="BtnIniciarSesion_Clicked"/>
 
 
                 </VerticalStackLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto1_NL15_47.segundaVentana">
+             
+             
+            <Grid BackgroundColor="White"
+                  RowDefinitions="30, 1*"
+                  Margin="10"
+                  Padding="10">
+
+                <HorizontalStackLayout Grid.Row="0">
+                    <Label Text="Inicio"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        TextColor="Black"
+                        FontSize="25"/>
+                </HorizontalStackLayout>
+
+                <Border StrokeThickness="1"
+                        StrokeShape="RoundRectangle 15"
+                        Stroke="Black"
+                        Grid.Row="1">
+
+                    <Grid RowDefinitions="1*,60"> 
+                        <CollectionView ItemsSource="{Binding ListaAhorro}"
+                                        x:Name="ListAhorro"
+                                        Grid.Row="0"
+                                        SelectionMode="Single"
+                                        SelectionChanged="ListAhorro_SelectionChanged">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Border StrokeShape="RoundRectangle 30"
+                                            BackgroundColor="White"
+                                            Padding="10"
+                                            Margin="10"
+                                            HeightRequest="100"
+                                            StrokeThickness="1">
+                                            <Border.Shadow>
+                                                <Shadow Brush="black"
+                                                        Offset="3,3"
+                                                        Radius="10"
+                                                        Opacity="0.5"/>
+                                            </Border.Shadow>
+                                                <VerticalStackLayout Grid.Row="0">
+                                                    <Label Text="{Binding Nombre}" 
+                                                        FontAttributes="Bold" 
+                                                        TextColor="Black"
+                                                        FontSize="20"/>
+                                                    <Label Text="{Binding Ahorrado}"
+                                                        FontAttributes="Bold" 
+                                                        TextColor="Black"
+                                                        FontSize="20"/>
+                                                </VerticalStackLayout>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate> 
+
+                        </CollectionView>
+
+                        <Border StrokeShape="RoundRectangle 30"
+                            BackgroundColor="White"
+                            WidthRequest="50" 
+                            Margin="5"
+                            HorizontalOptions="End"
+                            Grid.Row="1">
+                            <Border.Shadow>
+                                <Shadow Brush="Black"
+                                    Offset="3,3"
+                                    Radius="10"
+                                    Opacity="0.5"/>
+                            </Border.Shadow>
+                            <Button x:Name="BtnAgregar"
+                                BackgroundColor="White"
+                                Grid.Row="1"
+                                Text="+"
+                                FontSize="20"
+                                TextColor="Black"
+                                Clicked="BtnAgregar_Clicked"/>
+                        </Border>
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+</ContentPage>

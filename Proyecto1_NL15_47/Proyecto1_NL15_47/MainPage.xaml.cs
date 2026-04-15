@@ -6,6 +6,13 @@
         {
             InitializeComponent();
         }
+
+        private async void BtnIniciarSesion_Clicked(object sender, EventArgs e)
+        {
+            var segundapantalla = new segundaVentana();
+
+            await Navigation.PushAsync(segundapantalla);
+        }
     }
 }
  
