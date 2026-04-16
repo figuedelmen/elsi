@@ -10,8 +10,8 @@ namespace Proyecto1_NL15_47
 
             ListaAhorro = new ObservableCollection<Ahorros>
             {
-                new Ahorros { Nombre = "Viaje", Ahorrado = 200 },
-                new Ahorros { Nombre = "Compras", Ahorrado = 300 },
+                new Ahorros { Nombre = "Viaje", Ahorrado = $"Ahorro:{200}" },
+                new Ahorros { Nombre = "Compras", Ahorrado = $"Ahorro:{200}" },
             };
 
             BindingContext = this;
@@ -25,7 +25,7 @@ namespace Proyecto1_NL15_47
             public int Id { get; set; }
             public string Logo { get; set; } = string.Empty;
             public string Nombre { get; set; } = string.Empty;
-            public int Ahorrado { get; set; }
+            public string Ahorrado { get; set; } = string.Empty;
         }
 
         private void ListAhorro_SelectionChanged(object sender, SelectionChangedEventArgs e)
