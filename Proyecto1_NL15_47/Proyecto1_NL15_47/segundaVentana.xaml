@@ -11,11 +11,11 @@
                   Padding="0"
                   HorizontalOptions="Fill">
 
-                <HorizontalStackLayout Grid.Row="0">
+                <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center"
+                    VerticalOptions="Center">
                     <Label Text="Inicio"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
                         TextColor="Black"
+                        FontAttributes="Bold"
                         FontSize="25"/>
                 </HorizontalStackLayout>
 

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Proyecto1_NL15_47
 {
@@ -28,13 +29,33 @@ namespace Proyecto1_NL15_47
             public string Ahorrado { get; set; } = string.Empty;
         }
 
-        private void ListAhorro_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListAhorro_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var AhorroSeleccionado = e.CurrentSelection.FirstOrDefault() as Ahorros;
+
+            if (AhorroSeleccionado != null)
+            { 
+                var mostrarAhorro = new MostrarAhorro();
+
+                mostrarAhorro.Id_usuario_c = AhorroSeleccionado.Id_usuario;
+
+                mostrarAhorro.Id_c = AhorroSeleccionado.Id;
+
+                mostrarAhorro.Logo_c = AhorroSeleccionado.Logo;
+
+                mostrarAhorro.Nombre_c = AhorroSeleccionado.Nombre;
+
+                mostrarAhorro.Ahorrado_c = AhorroSeleccionado.Ahorrado;
+
+                await Navigation.PushAsync(mostrarAhorro);
+            }
         }
 
-        private void BtnAgregar_Clicked(object sender, EventArgs e)
+        private async void BtnAgregar_Clicked(object sender, EventArgs e)
         {
-            
+            var agregarAhorro = new AgregarAhorro();
+
+            await Navigation.PushAsync(agregarAhorro);
         }
     }
 }
