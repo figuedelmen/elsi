@@ -6,16 +6,9 @@ namespace Proyecto1_api_NL15_47.Data
 {
     public class llave_maestra
     {
-        private readonly IConfiguration _configuration;
-
-        public llave_maestra(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public MySqlConnection conexion()
         {
-            string? servidor = _configuration.GetConnectionString("conexion1");
+            string? servidor = "Server=127.0.0.1;Port=3306;Database=ProyectoAhorro;User ID=root;Password=isma1912;";
 
             var conexion = new MySqlConnection(servidor);
             conexion.Open();
