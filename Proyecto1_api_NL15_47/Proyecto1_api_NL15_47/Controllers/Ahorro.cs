@@ -29,18 +29,23 @@ namespace Proyecto1_api_NL15_47.Controllers
             {
                 using (var conexion = _llave_maestra.conexion())
                 {
-                    string sql = "SELECT COUNT(*) FROM usuarios WHERE nombre = @nombre AND contrasena = @contrasena";
+                    string sql = "SELECT id FROM usuarios WHERE nombre = @nombre AND contrasena = @contrasena";
 
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@nombre", datos.nombre);
                         comando.Parameters.AddWithValue("@contrasena", datos.contrasena);
 
-                        int existe = Convert.ToInt32(comando.ExecuteScalar());
+                        var existe = comando.ExecuteScalar();
 
-                        if (existe > 0)
+                        if (existe != null)
                         {
-                            return Ok(new { message = "Inicio de sesion perfecto" });
+                            int id = Convert.ToInt32(existe);
+                            return Ok(new 
+                            { 
+                                message = "Inicio de sesion perfecto",
+                                id = id
+                            });
                         }
                         else
                         {
@@ -64,7 +69,7 @@ namespace Proyecto1_api_NL15_47.Controllers
             public string logo { get; set; } = string.Empty;
         }
 
-        [HttpPost("cargar/{idUsuario}")]
+        [HttpGet("cargar/{idUsuario}")]
         public IActionResult Cargar(int idUsuario)
         {
             List<AhorroModel> lista = new List<AhorroModel>();
@@ -72,9 +77,10 @@ namespace Proyecto1_api_NL15_47.Controllers
             {
                 using (var conexion = _llave_maestra.conexion())
                 {
-                    string sql = "SELECT * FROM ahorros WHERE id_usuario = @uid";
+                    string sql = "SELECT * FROM ahorros WHERE id_usuario = @id";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
+                        comando.Parameters.AddWithValue("@id", idUsuario);
                         var reader = comando.ExecuteReader();
                         while (reader.Read())
                         {
@@ -111,13 +117,15 @@ namespace Proyecto1_api_NL15_47.Controllers
             {
                 using (var conexion = _llave_maestra.conexion())
                 {
-                    string sql = @"INSERT INTO ahorros (id_usuario, nombre, logo) 
-                    (@id,@nombre,@logo)";
+                    string sql = @"INSERT INTO ahorros (id_usuario, nombre, ahorrado, logo) 
+                    values (@id,@nombre, @ahorrado, @logo)";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@id", datos.id_usuario);
                         comando.Parameters.AddWithValue("@nombre", datos.nombre);
                         comando.Parameters.AddWithValue("@logo", datos.logo);
+
+                        comando.ExecuteNonQuery();
                     }
                 }
                 return Ok(datos);

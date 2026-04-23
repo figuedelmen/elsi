@@ -6,20 +6,26 @@ namespace Proyecto1_NL15_47
 {
     public partial class segundaVentana : ContentPage
     {
-        public segundaVentana()
+        public segundaVentana(int id)
         {
             InitializeComponent();
+
+            idUsuario = id; 
 
             ListaAhorro = new ObservableCollection<AhorroModel>();
 
             BindingContext = this;
+
+            CargarDatos();
         }
+
+        public int idUsuario;
 
         public async void CargarDatos()
         {
             using (var client = new HttpClient())
             {
-                var url = "http://192.168.1.11:5256/Ahorro/Listar/1"; 
+                var url = $"http://192.168.101.120:5256/Ahorro/cargar/{idUsuario}"; 
 
                 try
                 {
@@ -88,9 +94,17 @@ namespace Proyecto1_NL15_47
 
         private async void BtnAgregar_Clicked(object? sender, EventArgs e)
         {
-            var agregarAhorro = new AgregarAhorro();
+            Poput.IsVisible = true;
+        }
 
-            await Navigation.PushAsync(agregarAhorro);
+        private void BtnGuardar_Clicked(object? sender, EventArgs e)
+        {
+            
+        }
+
+        private void BtnCerrar_Clicked(object sender, EventArgs e)
+        {
+            Poput.IsVisible = false;
         }
     }
 }

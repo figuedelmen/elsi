@@ -1,7 +1,7 @@
 ﻿using System.Text; 
 using System.Net.Http;
-using System.Text.Json; 
-using Android.Media;
+using System.Text.Json;
+using System.Net.Http.Headers;
 
 namespace Proyecto1_NL15_47
 {
@@ -18,6 +18,12 @@ namespace Proyecto1_NL15_47
             public string contrasena { get; set; } = string.Empty;
         }
 
+        public class loginResponse
+        {
+            public string message {get;set;} = string.Empty;
+            public int id {get;set;}
+        }
+
         private async void BtnIniciarSesion_Clicked(object? sender, EventArgs e)
         {
             var datoslogin = new loginUser
@@ -28,7 +34,7 @@ namespace Proyecto1_NL15_47
 
             using (var client = new HttpClient())
             {
-                var url = "http://192.168.1.11:5256/Ahorro/Info";
+                var url = "http://192.168.101.120:5256/Ahorro/Info";
 
                 var json = JsonSerializer.Serialize(datoslogin);
 
@@ -39,7 +45,13 @@ namespace Proyecto1_NL15_47
                     var response = await client.PostAsync(url,content);
                     if (response.IsSuccessStatusCode)
                     {
-                        var segundapantalla = new segundaVentana();
+                        var respuesta = await response.Content.ReadAsStringAsync();
+
+                        var datos = JsonSerializer.Deserialize<loginResponse>(respuesta);
+
+                        int idUsuario = datos.id;
+
+                        var segundapantalla = new segundaVentana(idUsuario);
 
                         await Navigation.PushAsync(segundapantalla);
                     }

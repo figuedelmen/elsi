@@ -51,17 +51,17 @@
                                                         Radius="10"
                                                         Opacity="0.5"/>
                                             </Border.Shadow>
-                                                <VerticalStackLayout Grid.Row="0" VerticalOptions="Center"
+                                                <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center"
                                                     HorizontalOptions="Center">
-                                                    <Label Text="{Binding Nombre}" 
+                                                    <Label Text="{Binding nombre}" 
                                                         FontAttributes="Bold" 
                                                         TextColor="Black"
                                                         FontSize="20"/>
-                                                    <Label Text="{Binding Ahorrado}"
+                                                    <Label Text="{Binding ahorrado, StringFormat='Ahorrado: {0}'}"
                                                         FontAttributes="Bold" 
                                                         TextColor="Black"
                                                         FontSize="20"/>
-                                                </VerticalStackLayout>
+                                                </HorizontalStackLayout>
                                         </Border>
                                     </Grid>
                                 </DataTemplate>
@@ -93,7 +93,51 @@
                         </Border>
 
                     </Grid>
+
                 </Border>
+
+                <Grid x:Name="Poput"
+                      IsVisible="False"
+                      Grid.RowSpan="2">
+
+                    <Border BackgroundColor="White"
+                            StrokeShape="RoundRectangle 20"
+                            Padding="20"
+                            WidthRequest="280"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <Entry x:Name="txtNombre" 
+                                Placeholder="Nombre" 
+                                Keyboard="Chat"
+                                TextColor="Black"/>
+
+                            <Entry x:Name="txtCantidad"
+                                 Placeholder="Cantidad" 
+                                 Keyboard="Numeric"
+                                 TextColor="Black"/>
+
+                            <Button Text="Guardar" 
+                                x:Name="BtnGuardar"
+                                BackgroundColor="Transparent"
+                                TextColor="Black"
+                                BorderColor="Black"
+                                BorderWidth="1"
+                                Clicked="BtnGuardar_Clicked"/>
+
+                            <Button Text="Cerrar" 
+                                x:Name="BtnCerrar"
+                                BackgroundColor="Transparent"
+                                TextColor="Black"
+                                BorderColor="Black"
+                                BorderWidth="1"
+                                Clicked="BtnCerrar_Clicked"/>
+
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
 
             </Grid>
 
