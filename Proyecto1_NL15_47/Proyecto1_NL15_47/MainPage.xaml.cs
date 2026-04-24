@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Net.Http.Headers;
 
-namespace Proyecto1_NL15_47
+ namespace Proyecto1_NL15_47
 {
     public partial class MainPage : ContentPage
     {
@@ -34,7 +34,7 @@ namespace Proyecto1_NL15_47
 
             using (var client = new HttpClient())
             {
-                var url = "http://192.168.101.120:5256/Ahorro/Info";
+                var url = "http://192.168.1.11:5256/Ahorro/Info";
 
                 var json = JsonSerializer.Serialize(datoslogin);
 
@@ -49,8 +49,8 @@ namespace Proyecto1_NL15_47
 
                         var datos = JsonSerializer.Deserialize<loginResponse>(respuesta);
 
-                        int idUsuario = datos.id;
-
+                        int idUsuario = datos?.id ?? 0;
+                        
                         var segundapantalla = new segundaVentana(idUsuario);
 
                         await Navigation.PushAsync(segundapantalla);

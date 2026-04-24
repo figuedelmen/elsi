@@ -4,8 +4,172 @@
              x:Class="Proyecto1_NL15_47.MostrarAhorro"
              Shell.NavBarIsVisible="False">
              
-      <Grid BackgroundColor="White">
+      <Grid BackgroundColor="White"
+            VerticalOptions="Fill"
+            Margin="0"
+            Padding="0"
+            HorizontalOptions="Fill">
         
+            <Border StrokeThickness="0"
+                  Margin="10"
+                  StrokeShape="RoundRectangle 30"
+                  BackgroundColor="White">
+                  <Border.Shadow>
+                        <Shadow Brush="Black"
+                              Offset="3,3"
+                              Radius="10"
+                              Opacity="0.5"/>
+                  </Border.Shadow>
+
+                  <Grid RowDefinitions="Auto, 1*" Margin="10">
+                        <VerticalStackLayout Grid.Row="0"
+                              Spacing="10" HorizontalOptions="Center">
+                              
+                              <Image x:Name="imgLogo"
+                                    Source="{Binding Logo}"
+                                    HeightRequest="100"
+                                    WidthRequest="100"/>
+
+                              <Label x:Name="LblNombre"
+                                    Text="{Binding Nombre}"
+                                    FontSize="25"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    HorizontalOptions="Center"/>
+
+                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                    <Label Text="$" FontSize="20" TextColor="#2ecc71" VerticalOptions="End" Margin="0,0,0,5"/>
+                                    <Label x:Name="lblAhorrado"
+                                          Text="{Binding Ahorrado}"
+                                          FontSize="45"
+                                          FontAttributes="Bold"
+                                          TextColor="#2ecc71" />
+                              </HorizontalStackLayout>
+                
+                              <Label Text="Total acumulado" 
+                                    TextColor="Gray" 
+                                    HorizontalTextAlignment="Center" />
+
+                              <Border StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20"
+                                    BackgroundColor="White"
+                                    Margin="10">
+                                    <Border.Shadow>
+                                          <Shadow Brush="Black"
+                                                Offset="2,2"
+                                                Radius="10"
+                                                Opacity="0.5"/>
+                                    </Border.Shadow>
+
+                                    <Button x:Name="BtnDeposito"
+                                          BackgroundColor="White"
+                                          Text="Depositar"
+                                          TextColor="Black"
+                                          Clicked="BtnDeposito_Clicked"/>
+
+                              </Border>
+
+                        </VerticalStackLayout>
+
+                        <CollectionView ItemsSource="{Binding listaDepositos}"
+                                    x:Name="ListAhorro"
+                                    Grid.Row="1"
+                                    SelectionMode="Single" >
+                              <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                          <Grid>
+                                          <Border StrokeShape="RoundRectangle 30"
+                                                      BackgroundColor="White"
+                                                      Padding="10"
+                                                      Margin="10"
+                                                      HeightRequest="100"
+                                                      StrokeThickness="0">
+                                                <Border.Shadow>
+                                                      <Shadow Brush="Black" Offset="3,3" Radius="10" Opacity="0.5"/>
+                                                </Border.Shadow>
+                                                
+                                                <VerticalStackLayout Spacing="5" VerticalOptions="Center" HorizontalOptions="Center">
+                                                      <Label Text="{Binding deposito, StringFormat='Monto: ${0:F2}'}" 
+                                                            FontAttributes="Bold" 
+                                                            TextColor="Black"
+                                                            FontSize="20"/>
+                                                      
+                                                      <Label Text="{Binding fecha_deposito, StringFormat='{0:dd/MM/yyyy}'}"
+                                                            TextColor="#555555"
+                                                            FontSize="16"
+                                                            HorizontalOptions="Center"/>
+                                                </VerticalStackLayout>
+                                          </Border>
+                                          </Grid>
+                                    </DataTemplate>
+                              </CollectionView.ItemTemplate> 
+                        </CollectionView>
+
+                  </Grid>
+
+            </Border>
+
+            <Grid x:Name="Poput"
+                  IsVisible="False"
+                  Grid.RowSpan="2">
+
+                    <Border BackgroundColor="White"
+                            StrokeShape="RoundRectangle 20"
+                            StrokeThickness="0"
+                            Padding="5"
+                            WidthRequest="280"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black"
+                                        Offset="2,2"
+                                        Radius="5"
+                                        Opacity="0.5"/>
+                                </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <Border StrokeShape="RoundRectangle 30"
+                                StrokeThickness="0"
+                                Margin="5"
+                                BackgroundColor="White">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black"
+                                        Offset="2,2"
+                                        Radius="5"
+                                        Opacity="0.5"/>
+                                </Border.Shadow>
+                                <Entry x:Name="txtDeposito" 
+                                    Placeholder="Deposito" 
+                                    Keyboard="Numeric"
+                                    TextColor="Black"/>
+                            </Border>
+
+                            <HorizontalStackLayout HorizontalOptions="Center"
+                                VerticalOptions="Center" Spacing="10">
+                                <Button Text="Depositar" 
+                                    x:Name="BtnGuardar"
+                                    BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                    BorderColor="Black"
+                                    BorderWidth="1"
+                                    WidthRequest="90"
+                                    Clicked="BtnGuardar_Clicked"/>
+
+                                <Button Text="Cerrar" 
+                                    x:Name="BtnCerrar"
+                                    BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                    BorderColor="Black"
+                                    BorderWidth="1"
+                                    WidthRequest="90"
+                                    Clicked="BtnCerrar_Clicked"/>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+                  </Border>
+            </Grid>
+
       </Grid>
 
 </ContentPage>

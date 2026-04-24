@@ -51,8 +51,14 @@
                                                         Radius="10"
                                                         Opacity="0.5"/>
                                             </Border.Shadow>
-                                                <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center"
-                                                    HorizontalOptions="Center">
+                                            <Grid ColumnDefinitions="100, 1*, 100">
+
+                                                <Image Source="{Binding logo}"
+                                                       Grid.Column="0"
+                                                       Margin="10"/>
+
+                                                <VerticalStackLayout Spacing="10" VerticalOptions="Center"
+                                                    HorizontalOptions="Center" Grid.Column="1">
                                                     <Label Text="{Binding nombre}" 
                                                         FontAttributes="Bold" 
                                                         TextColor="Black"
@@ -61,7 +67,28 @@
                                                         FontAttributes="Bold" 
                                                         TextColor="Black"
                                                         FontSize="20"/>
-                                                </HorizontalStackLayout>
+                                                </VerticalStackLayout>
+
+                                                <Border StrokeShape="RoundRectangle 30"
+                                                    StrokeThickness="0"
+                                                    Margin="10"
+                                                    Grid.Column="2"
+                                                    BackgroundColor="White">
+                                                    <Border.Shadow>
+                                                        <Shadow Brush="Black"
+                                                            Offset="2,2"
+                                                            Radius="5"
+                                                            Opacity="0.5"/>
+                                                    </Border.Shadow>
+                                                    <Button x:Name="BtnEliminar"
+                                                            Clicked="BtnEliminar_Clicked"
+                                                            BackgroundColor="White"
+                                                            Text="🗑️"
+                                                            CommandParameter="{Binding .}"/>
+                                                </Border>
+
+                                            </Grid>
+
                                         </Border>
                                     </Grid>
                                 </DataTemplate>
@@ -102,38 +129,85 @@
 
                     <Border BackgroundColor="White"
                             StrokeShape="RoundRectangle 20"
-                            Padding="20"
+                            StrokeThickness="0"
+                            Padding="5"
                             WidthRequest="280"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black"
+                                        Offset="2,2"
+                                        Radius="5"
+                                        Opacity="0.5"/>
+                                </Border.Shadow>
 
                         <VerticalStackLayout Spacing="10">
 
-                            <Entry x:Name="txtNombre" 
-                                Placeholder="Nombre" 
-                                Keyboard="Chat"
-                                TextColor="Black"/>
+                            <Border StrokeShape="RoundRectangle 30"
+                                StrokeThickness="0"
+                                Margin="5"
+                                BackgroundColor="White">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black"
+                                        Offset="2,2"
+                                        Radius="5"
+                                        Opacity="0.5"/>
+                                </Border.Shadow>
+                                <Entry x:Name="txtNombre" 
+                                    Placeholder="Nombre" 
+                                    Keyboard="Chat"
+                                    TextColor="Black"/>
+                            </Border>
 
-                            <Entry x:Name="txtCantidad"
-                                 Placeholder="Cantidad" 
-                                 Keyboard="Numeric"
-                                 TextColor="Black"/>
+                            <Border StrokeShape="RoundRectangle 30"
+                                StrokeThickness="0"
+                                Margin="5"
+                                BackgroundColor="White">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black"
+                                        Offset="2,2"
+                                        Radius="5"
+                                        Opacity="0.5"/>
+                                </Border.Shadow>
+                                <Picker x:Name="pickerLogos"
+                                        Title="Selecciona un icono"
+                                        TitleColor="Gray"
+                                        TextColor="Black"
+                                        Margin="10,0"
+                                        HorizontalOptions="Fill">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Auto</x:String>
+                                            <x:String>Hogar</x:String>
+                                            <x:String>Viaje</x:String>
+                                            <x:String>Comida</x:String>
+                                            <x:String>Regalo</x:String>
+                                            <x:String>General</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Border>
 
-                            <Button Text="Guardar" 
-                                x:Name="BtnGuardar"
-                                BackgroundColor="Transparent"
-                                TextColor="Black"
-                                BorderColor="Black"
-                                BorderWidth="1"
-                                Clicked="BtnGuardar_Clicked"/>
+                            <HorizontalStackLayout HorizontalOptions="Center"
+                                VerticalOptions="Center" Spacing="10">
+                                <Button Text="Guardar" 
+                                    x:Name="BtnGuardar"
+                                    BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                    BorderColor="Black"
+                                    BorderWidth="1"
+                                    WidthRequest="90"
+                                    Clicked="BtnGuardar_Clicked"/>
 
-                            <Button Text="Cerrar" 
-                                x:Name="BtnCerrar"
-                                BackgroundColor="Transparent"
-                                TextColor="Black"
-                                BorderColor="Black"
-                                BorderWidth="1"
-                                Clicked="BtnCerrar_Clicked"/>
+                                <Button Text="Cerrar" 
+                                    x:Name="BtnCerrar"
+                                    BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                    BorderColor="Black"
+                                    BorderWidth="1"
+                                    WidthRequest="90"
+                                    Clicked="BtnCerrar_Clicked"/>
+                            </HorizontalStackLayout>
 
                         </VerticalStackLayout>
                     </Border>

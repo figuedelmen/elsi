@@ -8,17 +8,16 @@
         <Grid VerticalOptions="Center" HorizontalOptions="Center" Padding="30">
 
             <Border BackgroundColor="#1E1E1E"
-                Stroke="White"
-                StrokeThickness="1"
+                StrokeThickness="0"
                 StrokeShape="RoundRectangle 30"
                 WidthRequest="300"
                 HeightRequest="350">
 
                 <Border.Shadow>
                     <Shadow Brush="White"
-                        Offset="0,0" 
-                        Radius="10"
-                        Opacity="0.4" />
+                        Offset="2,2" 
+                        Radius="5"
+                        Opacity="0.5" />
                 </Border.Shadow>
 
                 <VerticalStackLayout Spacing="25" Padding="20" VerticalOptions="Center">

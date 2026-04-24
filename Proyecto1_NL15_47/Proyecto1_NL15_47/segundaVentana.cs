@@ -19,13 +19,20 @@ namespace Proyecto1_NL15_47
             CargarDatos();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
+            CargarDatos();
+        }
+
         public int idUsuario;
 
         public async void CargarDatos()
         {
             using (var client = new HttpClient())
             {
-                var url = $"http://192.168.101.120:5256/Ahorro/cargar/{idUsuario}"; 
+                var url = $"http://192.168.1.11:5256/Ahorro/cargar/{idUsuario}"; 
 
                 try
                 {
@@ -76,19 +83,21 @@ namespace Proyecto1_NL15_47
 
             if (AhorroSeleccionado != null)
             { 
-                var mostrarAhorro = new MostrarAhorro();
-
-                mostrarAhorro.Id_usuario_c = AhorroSeleccionado.id_usuario;
-
-                mostrarAhorro.Id_c = AhorroSeleccionado.id;
-
-                mostrarAhorro.Logo_c = AhorroSeleccionado.logo;
-
-                mostrarAhorro.Nombre_c = AhorroSeleccionado.nombre;
-
-                mostrarAhorro.Ahorrado_c = AhorroSeleccionado.ahorrado;
+                var mostrarAhorro = new  MostrarAhorro(
+                    AhorroSeleccionado.id_usuario,
+                    AhorroSeleccionado.id,
+                    AhorroSeleccionado.logo,
+                    AhorroSeleccionado.nombre,
+                    AhorroSeleccionado.ahorrado
+                );
 
                 await Navigation.PushAsync(mostrarAhorro);
+                
+                var collectionView = sender as CollectionView;
+                if (collectionView != null)
+                {
+                    collectionView.SelectedItem = null;
+                }
             }
         }
 
@@ -97,14 +106,111 @@ namespace Proyecto1_NL15_47
             Poput.IsVisible = true;
         }
 
-        private void BtnGuardar_Clicked(object? sender, EventArgs e)
+        public class AhorroAgregar
         {
-            
+            public int id_usuario { get; set; }
+            public string nombre { get; set; } = string.Empty;
+            public string logo { get; set; } = string.Empty;
         }
 
-        private void BtnCerrar_Clicked(object sender, EventArgs e)
+        private async void BtnGuardar_Clicked(object? sender, EventArgs e)
+        {
+            if (pickerLogos.SelectedItem == null)
+            {
+                await DisplayAlertAsync("Error", "Selecciona un logo", "OK");
+                return;
+            }
+
+             if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                await DisplayAlertAsync("Error", "Escribe un Nombre", "OK");
+                return; 
+            }
+
+            string seleccion = pickerLogos.SelectedItem?.ToString() ?? "General";
+
+            string nombreArchivoLogo = $"{seleccion.ToLower()}.png";
+
+            var datos = new AhorroAgregar
+            {
+                id_usuario = idUsuario,
+                nombre = txtNombre.Text,
+                logo = nombreArchivoLogo
+            };
+
+            // Lo correcto es:
+            await DisplayAlertAsync("Título", "Mensaje", "Aceptar");
+
+            using (var client = new HttpClient())
+            {
+                var url = "http://192.168.1.11:5256/Ahorro/agregar";
+
+                var json = JsonSerializer.Serialize(datos);
+
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+                try
+                {
+                    var response = await client.PostAsync(url, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        txtNombre.Text = string.Empty;
+                        pickerLogos.SelectedIndex = -1;
+                        CargarDatos();
+                        Poput.IsVisible = false;
+                    }
+                    else
+                    {
+                        await DisplayAlertAsync("Error", "Error al agregar ahorro", "OK");
+                        Poput.IsVisible = false;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    await DisplayAlertAsync("Error", ex.Message, "OK");
+                }
+            }
+
+        }
+
+        private void BtnCerrar_Clicked(object? sender, EventArgs e)
         {
             Poput.IsVisible = false;
+        }
+
+        private async void BtnEliminar_Clicked(object? sender, EventArgs e)
+        {
+            var boton = sender as Button;
+            if (boton == null) return;
+
+            var ahorro = boton.CommandParameter as AhorroModel;
+            if (ahorro == null) return;
+
+            bool confirmar = await DisplayAlertAsync("Eliminar", $"¿Seguro que quieres borrar '{ahorro.nombre}'?", "Sí, borrar", "Cancelar");
+
+            if (confirmar)
+            {
+                using (var client = new HttpClient())
+                {
+                    var url = $"http://192.168.1.11:5256/Ahorro/eliminar/{ahorro.id}";
+                    try
+                    {
+                        var response = await client.DeleteAsync(url);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            CargarDatos();
+                        }
+                        else
+                        {
+                            await DisplayAlertAsync("Error", "No se pudo eliminar el ahorro", "OK");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlertAsync("Error de red", ex.Message, "OK");
+                    }
+                }
+            }
         }
     }
 }
