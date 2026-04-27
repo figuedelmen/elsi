@@ -1,6 +1,0 @@
-@Proyecto1_api_NL15_47_HostAddress = http://localhost:5031
-
-GET {{Proyecto1_api_NL15_47_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
