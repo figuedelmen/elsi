@@ -32,7 +32,7 @@ namespace Proyecto1_NL15_47
         {
             using (var client = new HttpClient())
             {
-                var url = $"http://192.168.1.11:5256/Ahorro/cargar/{idUsuario}"; 
+                var url = Conexion.BaseUrl + $"Ahorro/cargar/{idUsuario}";
 
                 try
                 {
@@ -138,12 +138,9 @@ namespace Proyecto1_NL15_47
                 logo = nombreArchivoLogo
             };
 
-            // Lo correcto es:
-            await DisplayAlertAsync("Título", "Mensaje", "Aceptar");
-
             using (var client = new HttpClient())
             {
-                var url = "http://192.168.1.11:5256/Ahorro/agregar";
+                var url = Conexion.BaseUrl + "Ahorro/agregar";
 
                 var json = JsonSerializer.Serialize(datos);
 
@@ -192,7 +189,8 @@ namespace Proyecto1_NL15_47
             {
                 using (var client = new HttpClient())
                 {
-                    var url = $"http://192.168.1.11:5256/Ahorro/eliminar/{ahorro.id}";
+                    var url = Conexion.BaseUrl + $"Ahorro/eliminar/{ahorro.id}";
+
                     try
                     {
                         var response = await client.DeleteAsync(url);

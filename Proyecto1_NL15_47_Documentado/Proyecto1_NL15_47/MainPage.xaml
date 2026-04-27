@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Declaración del archivo XML y su codificación -->
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             <!-- Espacio de nombres principal de .NET MAUI -->
+
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             <!-- Espacio de nombres para características XAML como x:Class -->
+
+             x:Class="Proyecto1_NL15_47.MainPage"
+             <!-- Indica la clase asociada en el archivo .cs -->
+
+             Shell.NavBarIsVisible="False">
+             <!-- Oculta la barra de navegación superior -->
+
+    <!-- Contenedor principal tipo Grid -->
+    <Grid VerticalOptions="Center" HorizontalOptions="Center" Padding="30">
+    <!-- Centra el contenido en pantalla y agrega un padding de 30 -->
+
+        <!-- Contenedor tipo Border (borde con fondo y forma redondeada) -->
+        <Border BackgroundColor="#1E1E1E"
+                <!-- Color de fondo oscuro -->
+
+                StrokeThickness="0"
+                <!-- Sin borde visible -->
+
+                StrokeShape="RoundRectangle 30"
+                <!-- Forma rectangular con esquinas redondeadas (radio 30) -->
+
+                WidthRequest="300"
+                HeightRequest="350">
+                <!-- Tamaño fijo del contenedor -->
+
+            <!-- Sombra del Border -->
+            <Border.Shadow>
+                <Shadow Brush="White"
+                        <!-- Color de la sombra -->
+
+                        Offset="2,2" 
+                        <!-- Desplazamiento de la sombra en X y Y -->
+
+                        Radius="5"
+                        <!-- Difuminado de la sombra -->
+
+                        Opacity="0.5" />
+                        <!-- Transparencia de la sombra -->
+            </Border.Shadow>
+
+            <!-- Contenedor vertical para organizar elementos -->
+            <VerticalStackLayout Spacing="25" Padding="20" VerticalOptions="Center">
+            <!-- Espaciado entre elementos de 25 y padding interno de 20 -->
+
+                <!-- Etiqueta de título -->
+                <Label Text="INICIO DE SESION"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+                       <!-- Texto centrado tanto vertical como horizontalmente -->
+
+                <!-- Contenedor para el campo de nombre -->
+                <Grid>
+                    <Entry x:Name="TexNombre"
+                           <!-- Nombre del control para usarlo en código C# -->
+
+                           Placeholder="Nombre"
+                           <!-- Texto de ayuda cuando está vacío -->
+
+                           Keyboard="Chat"
+                           <!-- Tipo de teclado (aunque "Chat" no es estándar, podría ajustarse) -->
+
+                           TextColor="White"/>
+                           <!-- Color del texto -->
+                </Grid>
+
+                <!-- Contenedor para el campo de contraseña -->
+                <Grid>
+                    <Entry x:Name="TexContraseña"
+                           Placeholder="Contraseña"
+                           <!-- Texto guía -->
+
+                           Keyboard="Password"
+                           <!-- Tipo de teclado para contraseña -->
+
+                           TextColor="White"/>
+                           <!-- Color del texto -->
+                </Grid>
+
+                <!-- Botón para iniciar sesión -->
+                <Button x:Name="BtnIniciarSesion"
+                        BackgroundColor="Transparent"
+                        <!-- Fondo transparente -->
+
+                        Text="Iniciar Sesion"
+                        <!-- Texto del botón -->
+
+                        TextColor="White"
+                        <!-- Color del texto -->
+
+                        BorderColor="White"
+                        <!-- Color del borde -->
+
+                        BorderWidth="1"
+                        <!-- Grosor del borde -->
+
+                        Clicked="BtnIniciarSesion_Clicked"/>
+                        <!-- Evento que se ejecuta al hacer clic -->
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+
+</ContentPage>

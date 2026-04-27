@@ -26,7 +26,7 @@ namespace Proyecto1_NL15_47
         {
             using (var client = new HttpClient())
             {
-                var url = $"http://192.168.1.11:5256/Ahorro/deposito/{IdAhorro}"; 
+                var url = Conexion.BaseUrl + $"Ahorro/deposito/{IdAhorro}";
 
                 try
                 {
@@ -103,7 +103,7 @@ namespace Proyecto1_NL15_47
 
             using (var client = new HttpClient())
             {
-                var url = "http://192.168.1.11:5256/Ahorro/depositar";
+                var url = Conexion.BaseUrl + "Ahorro/depositar";
                 var json = JsonSerializer.Serialize(envio);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 

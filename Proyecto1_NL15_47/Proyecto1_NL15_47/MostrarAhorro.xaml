@@ -94,7 +94,7 @@
                                                             TextColor="Black"
                                                             FontSize="20"/>
                                                       
-                                                      <Label Text="{Binding fecha_deposito, StringFormat='{0:dd/MM/yyyy}'}"
+                                                      <Label Text="{Binding fecha_deposito, StringFormat='{0:dd/MM/yyyy hh:mm tt}'}"
                                                             TextColor="#555555"
                                                             FontSize="16"
                                                             HorizontalOptions="Center"/>
