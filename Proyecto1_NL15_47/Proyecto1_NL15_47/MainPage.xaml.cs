@@ -9,12 +9,12 @@ using System.Net.Http.Headers;
     {
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         public class loginUser
         {
-            public string nombre { get; set; } = string.Empty;
+             public string nombre { get; set; } = string.Empty;
             public string contrasena { get; set; } = string.Empty;
         }
 
@@ -30,7 +30,7 @@ using System.Net.Http.Headers;
             {
                 nombre = TexNombre.Text,
                 contrasena = TexContraseña.Text
-            };
+            }; 
 
             using (var client = new HttpClient())
             {

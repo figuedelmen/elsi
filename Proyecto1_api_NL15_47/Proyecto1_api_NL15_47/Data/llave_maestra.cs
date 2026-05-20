@@ -14,5 +14,16 @@ namespace Proyecto1_api_NL15_47.Data
             conexion.Open();
             return conexion;
         }
+
+        public MySqlConnection conexion1()
+        {
+            string? servidor = "Server=127.0.0.1;Port=3306;Database=BorrowBack;User ID=root;Password=isma1912;";
+
+            var conexion = new MySqlConnection(servidor);
+            conexion.Open();
+            return conexion;
+        }
+
+        
     }
 }

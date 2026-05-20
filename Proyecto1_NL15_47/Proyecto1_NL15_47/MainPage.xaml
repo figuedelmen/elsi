@@ -14,7 +14,7 @@
                 HeightRequest="350">
 
                 <Border.Shadow>
-                    <Shadow Brush="White"
+                    <Shadow Brush="White"  
                         Offset="2,2" 
                         Radius="5"
                         Opacity="0.5" />

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             x:Class="BorrowBack.MenuDatos"
+             Shell.NavBarIsVisible="False"
+             Padding="0"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+            <Grid BackgroundColor="White"
+                RowDefinitions="Auto,1*"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                Margin="0"
+                Padding="0">
+
+                <HorizontalStackLayout Grid.Row="0" VerticalOptions="Center"
+                    HorizontalOptions="Start">
+                    <Label Text="BorrowBack"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="25"
+                        Margin="10"/>
+                </HorizontalStackLayout>
+
+                <Grid Grid.Row="1" RowDefinitions="1*,70">
+                    <CollectionView ItemsSource="{Binding ListaPrestamo}"
+                        x:Name="ListaPrestamosCol"
+                        Grid.Row="0"
+                        SelectionMode="Single"
+                        SelectionChanged="ListaPrestamos_SelectionChanged">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+
+                                    <Border StrokeShape="RoundRectangle 30"
+                                        BackgroundColor="White"
+                                        Padding="10"
+                                        Margin="10"
+                                        HeightRequest="100"
+                                        StrokeThickness="0">
+                                        <Border.Shadow>
+                                            <Shadow Brush="Black"
+                                                Offset="3,3"
+                                                Radius="10"
+                                                Opacity="0.5"/>
+                                        </Border.Shadow>
+
+                                        <Grid ColumnDefinitions="90, 1*, 1*, Auto">
+ 
+                                            <Border Grid.Column="0"
+                                                    StrokeShape="RoundRectangle 16"
+                                                    StrokeThickness="0"
+                                                    HeightRequest="80"
+                                                    WidthRequest="80"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center">
+                                                <Image Source="{Binding url}"
+                                                    Aspect="AspectFill"/>
+                                            </Border>
+
+                                            <VerticalStackLayout Grid.Column="1" 
+                                                                Spacing="4" 
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="Start">
+                                                
+                                                <Label Text="{Binding objeto}"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#1D1D1F"
+                                                    FontSize="18"
+                                                    LineBreakMode="TailTruncation"/>
+
+                                                <Label Text="{Binding persona, StringFormat='Persona: {0}'}"
+                                                    TextColor="#666666"
+                                                    FontSize="14"/>
+                                                
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="2" 
+                                                                Spacing="4" 
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="Start">
+
+                                                <Label Text="{Binding estado, StringFormat='Estado: {0}'}"
+                                                    TextColor="#666666"
+                                                    FontSize="14"/>
+
+                                                <Label Text="{Binding devolucion, StringFormat='Devolucion:{0:dd/MM/yyyy}'}"
+                                                    TextColor="#666666"
+                                                    FontAttributes="Bold"
+                                                    FontSize="13"
+                                                    VerticalOptions="Center"/>
+                                                
+                                            </VerticalStackLayout>
+
+                                            <Border StrokeShape="RoundRectangle 30"
+                                                StrokeThickness="0"
+                                                Margin="10"
+                                                Grid.Column="3"
+                                                BackgroundColor="White">
+                                                <Border.Shadow>
+                                                    <Shadow Brush="Black"
+                                                        Offset="2,2"
+                                                        Radius="5"
+                                                        Opacity="0.5"/>
+                                                </Border.Shadow>
+                                                <Button x:Name="BtnEliminar"
+                                                        Clicked="BtnEliminar_Clicked"
+                                                        BackgroundColor="White"
+                                                        Text="🗑️"
+                                                        CommandParameter="{Binding .}"/>
+                                            </Border>
+
+                                        </Grid>
+
+                                    </Border>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                      </CollectionView>
+
+                      <Border StrokeShape="RoundRectangle 30"
+                        BackgroundColor="White"
+                        WidthRequest="60"
+                        Margin="5"
+                        StrokeThickness="0"
+                        HorizontalOptions="End"
+                        Grid.Row="1">
+                        <Border.Shadow>
+                            <Shadow Brush="black"
+                                Offset="3,3"
+                                Radius="10"
+                                Opacity="0.5"/>
+                        </Border.Shadow>
+                         
+                        <Button x:Name="BtnAgregar"
+                            BackgroundColor="White"
+                            Text="+"
+                            BorderWidth="0"
+                            FontSize="20"
+                            TextColor="Black"
+                            Clicked="BtnAgregar_Clicked"/>
+
+                      </Border>
+                </Grid>
+
+                <Grid x:Name="Poput"
+                    IsVisible="False"
+                    Grid.RowSpan="2"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    
+                    <Border BackgroundColor="#E6FFFFFF" 
+                            StrokeThickness="1"
+                            Stroke="#33FFFFFF"
+                            StrokeShape="RoundRectangle 24"
+                            WidthRequest="320"
+                            Padding="20">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0,15"
+                                    Radius="25"
+                                    Opacity="0.15"/>
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="15">
+
+                            <Label Text="Nuevo Préstamo" 
+                                FontSize="20" 
+                                FontAttributes="Bold" 
+                                TextColor="#1D1D1F" 
+                                HorizontalOptions="Center"
+                                Margin="0,0,0,5"/>
+
+                            <Border StrokeShape="RoundRectangle 12" 
+                                    StrokeThickness="1" 
+                                    Stroke="#33000000" 
+                                    BackgroundColor="#40FFFFFF"
+                                    Padding="12,2">
+                                <Entry x:Name="txtNombre_Persona" 
+                                    Placeholder="Nombre de la persona" 
+                                    Keyboard="Chat"
+                                    TextColor="Black"
+                                    PlaceholderColor="#666666"/>
+                            </Border>
+
+                            <Border StrokeShape="RoundRectangle 12" 
+                                    StrokeThickness="1" 
+                                    Stroke="#33000000" 
+                                    BackgroundColor="#40FFFFFF"
+                                    Padding="12,2">
+                                <Entry x:Name="txtNombre_Objeto" 
+                                    Placeholder="Nombre del Objeto" 
+                                    Keyboard="Chat"
+                                    TextColor="Black"
+                                    PlaceholderColor="#666666"/>
+                            </Border>
+
+                            <Border StrokeShape="RoundRectangle 12" 
+                                    StrokeThickness="1" 
+                                    Stroke="#33000000" 
+                                    BackgroundColor="#40FFFFFF"
+                                    Padding="12,2">
+                                <DatePicker x:Name="DateDevolucion"
+                                    MinimumDate="{x:Static sys:DateTime.Now}" 
+                                    Format="dd/MM/yyyy"
+                                    TextColor="Black"/>
+                            </Border>                                  
+
+                            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                                <Border x:Name="ImgPreviewBorder" 
+                                        StrokeShape="RoundRectangle 12" 
+                                        StrokeThickness="0" 
+                                        HeightRequest="90" 
+                                        WidthRequest="90" 
+                                        BackgroundColor="#20000000"> 
+                                    <Image x:Name="imgSelected" 
+                                        Source="camera_placeholder.png" 
+                                        Aspect="AspectFill" />
+                                </Border>
+                                
+                                <Button x:Name="BtnAgregarImagen"
+                                        Text="📷 Agregar Imagen"
+                                        FontSize="13"
+                                        BackgroundColor="#1A007AFF" 
+                                        TextColor="#007AFF"
+                                        CornerRadius="8"
+                                        HeightRequest="35"
+                                        Padding="15,0"
+                                        Clicked="BtnAgregarImagen_Clicked"/>
+                            </VerticalStackLayout>
+
+                            <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="12" Margin="0,10,0,0">
+                                
+                                <Button Text="Cancelar" 
+                                        x:Name="BtnCerrarPoput"
+                                        BackgroundColor="#1AFF3B30" 
+                                        TextColor="#FF3B30"
+                                        FontAttributes="Bold"
+                                        CornerRadius="12"
+                                        HeightRequest="45"
+                                        Grid.Column="0"
+                                        Clicked="BtnCerrarPoput_Clicked"/>
+
+                                <Button Text="Guardar" 
+                                        x:Name="BtnGuardarPoput"
+                                        BackgroundColor="#007AFF"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        CornerRadius="12"
+                                        HeightRequest="45"
+                                        Grid.Column="1"
+                                        Clicked="BtnGuardarPoput_Clicked"/>
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+            </Grid>
+</ContentPage>

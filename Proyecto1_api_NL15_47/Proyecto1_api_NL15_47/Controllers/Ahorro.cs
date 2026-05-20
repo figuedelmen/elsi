@@ -160,8 +160,7 @@ namespace Proyecto1_api_NL15_47.Controllers
         }
 
         public class ListaDepositos
-        {
-            public decimal deposito{get; set;}
+        {   public decimal deposito{get; set;}
             public DateTime fecha_deposito{get; set;}
         };
 
