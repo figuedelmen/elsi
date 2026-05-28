@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using Proyecto1_api_NL15_47.Data;
 

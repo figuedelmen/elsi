@@ -1,9 +1,5 @@
-using System.Diagnostics.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
-using Mysqlx;
 using Proyecto1_api_NL15_47.Data;
 
 namespace Proyecto1_api_NL15_47.Controllers

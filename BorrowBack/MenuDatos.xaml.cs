@@ -1,7 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Text.Json;
-using Javax.Net.Ssl;
-using Proyecto1_NL15_47;
 using System.Text;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.AndroidOption;
@@ -264,7 +262,6 @@ public partial class MenuDatos : ContentPage
                 await DisplayAlertAsync("Error de Conexión", $"Detalle: {ex.Message}", "OK");
             }
         }     
-
     }
 
     private string RutaImagen = string.Empty;
