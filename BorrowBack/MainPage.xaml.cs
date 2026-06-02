@@ -21,7 +21,7 @@ public partial class MainPage : ContentPage
     public class loginResponse
     {
         public string message {get;set;} = string.Empty;
-        public int id {get;set;}
+        public int id {get;set;} 
     }
 
 

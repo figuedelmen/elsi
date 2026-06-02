@@ -78,4 +78,16 @@ public partial class MenuDatos : ContentPage
         public TimeSpan horaFin { get; set; }
         public string aula { get; set; } = string.Empty;      
     }
+
+    private void ListaPrestamosCol_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+    }
+
+    private void BtnEliminar_Clicked(object sender, EventArgs e)
+    {
+    }
+
+    private void BtnAgregar_Clicked(object sender, EventArgs e)
+    {
+    }
 }

@@ -71,4 +71,8 @@
 		<PackageReference Include="Plugin.LocalNotification" Version="14.1.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="../ASTA/ASTA.csproj" />
+	</ItemGroup>
+
 </Project>

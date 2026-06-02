@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Bcpg;
 using Proyecto1_api_NL15_47.Data;
 
 namespace Proyecto1_api_NL15_47.Controllers
@@ -60,6 +58,13 @@ namespace Proyecto1_api_NL15_47.Controllers
             {
                 return BadRequest(new {error = ex.Message});                
             }
+        }
+
+        public class Materias
+        {
+            public int id {get;set;}
+            public string nombre {get;set;} = string.Empty;
+            public string profesor {get;set;} = string.Empty;
         }
     }
 }

@@ -4,9 +4,135 @@
              x:Class="ASTA.MenuDatos"
              Shell.NavBarIsVisible="False">
 
-    <Grid >
+    <Grid BackgroundColor="White"
+        RowDefinitions="Auto,1*"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
 
-       
+        <HorizontalStackLayout Grid.Row="0" VerticalOptions="Center"
+            HorizontalOptions="Start">
+            <Label Text="ASTA"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="25"
+                Margin="10"/>
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="1" RowDefinitions="1*,70">
+            <CollectionView ItemsSource="{Binding ListaMaterias}"
+                x:Name="ListaPrestamosCol"
+                Grid.Row="0"
+                SelectionMode="Single"
+                SelectionChanged="ListaPrestamosCol_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Border StrokeShape="RoundRectangle 30"
+                                BackgroundColor="White"
+                                Padding="10"
+                                Margin="10"
+                                HeightRequest="100"
+                                StrokeThickness="0">
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                            Offset="3,3"
+                                            Radius="10"
+                                            Opacity="0.5"/>
+                                    </Border.Shadow>
+
+                                    <Grid ColumnDefinitions="90, 1*, 1*, Auto">
+                                        <Border Grid.Column="0"
+                                            StrokeShape="RoundRectangle 16"
+                                            StrokeThickness="0"
+                                            HeightRequest="80"
+                                            WidthRequest="80"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center">
+                                            <Image Source="{Binding url}"
+                                                Aspect="AspectFill"/>
+                                        </Border>
+
+                                        <VerticalStackLayout Grid.Column="1" 
+                                            Spacing="4" 
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start">
+                                                
+                                            <Label Text="{Binding objeto}"
+                                                FontAttributes="Bold"
+                                                TextColor="#1D1D1F"
+                                                FontSize="18"
+                                                LineBreakMode="TailTruncation"/>
+
+                                            <Label Text="{Binding persona, StringFormat='Persona: {0}'}"
+                                                TextColor="#666666"
+                                                FontSize="14"/>
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Grid.Column="2" 
+                                            Spacing="4" 
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start">
+
+                                            <Label Text="{Binding estado, StringFormat='Estado: {0}'}"
+                                                TextColor="#666666"
+                                                FontSize="14"/>
+
+                                            <Label Text="{Binding devolucion, StringFormat='Devolucion:{0:dd/MM/yyyy}'}"
+                                                TextColor="#666666"
+                                                FontAttributes="Bold"
+                                                FontSize="13"
+                                                VerticalOptions="Center"/>
+                                                
+                                        </VerticalStackLayout>
+
+                                        <Border StrokeShape="RoundRectangle 30"
+                                            StrokeThickness="0"
+                                            Margin="10"
+                                            Grid.Column="3"
+                                            BackgroundColor="White">
+                                            <Border.Shadow>
+                                                <Shadow Brush="Black"
+                                                    Offset="2,2"
+                                                    Radius="5"
+                                                    Opacity="0.5"/>
+                                            </Border.Shadow>
+                                            <Button x:Name="BtnEliminar"
+                                                    Clicked="BtnEliminar_Clicked"
+                                                    BackgroundColor="White"
+                                                    Text="🗑️"
+                                                    CommandParameter="{Binding .}"/>
+                                        </Border>
+                                    </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border StrokeShape="RoundRectangle 30"
+                BackgroundColor="White"
+                WidthRequest="60"
+                Margin="5"
+                StrokeThickness="0"
+                HorizontalOptions="End"
+                Grid.Row="1">
+                <Border.Shadow>
+                    <Shadow Brush="black"
+                        Offset="3,3"
+                        Radius="10"
+                        Opacity="0.5"/>
+                </Border.Shadow>
+                         
+                <Button x:Name="BtnAgregar"
+                    BackgroundColor="White"
+                    Text="+"
+                    BorderWidth="0"
+                    FontSize="20"
+                    TextColor="Black"
+                    Clicked="BtnAgregar_Clicked"/>
+
+            </Border>
+        </Grid>       
 
     </Grid>
 
