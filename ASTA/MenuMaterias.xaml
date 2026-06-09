@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ASTA.MenuMaterias"
+             x:Name="thisPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid BackgroundColor="White"
+        RowDefinitions="Auto,Auto, 1*"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
+
+        <HorizontalStackLayout Grid.Row="0" VerticalOptions="Center"
+            HorizontalOptions="Start">
+            <Label Text="ASTA"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="25"
+                Margin="10"/>
+        </HorizontalStackLayout>
+
+        <Border Grid.Row="1"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                BackgroundColor="#F4F4F6"
+                Margin="15,5,15,15"
+                Padding="20,15"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill">
+            
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                        Offset="0,4"
+                        Radius="8"
+                        Opacity="0.08"/>
+            </Border.Shadow>
+
+            <Grid ColumnDefinitions="Auto, *">
+                
+                <Border Grid.Column="0"
+                        StrokeShape="RoundRectangle 25"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        BackgroundColor="#2C2C2E"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        Margin="0,0,15,0">
+                    <Label Text="📘" 
+                           FontSize="22" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1" 
+                                     Spacing="4" 
+                                     VerticalOptions="Center">
+                    
+                    <Label x:Name="LaNombre"
+                           TextColor="#1D1D1F"
+                           FontAttributes="Bold"
+                           FontSize="22"
+                           LineBreakMode="TailTruncation"/>
+                    
+                    <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
+                        <Label Text="Profesor:"
+                               TextColor="#8E8E93"
+                               FontSize="14"
+                               FontAttributes="Italic"/>
+                        
+                        <Label x:Name="LaProfesor"
+                               TextColor="#48484A"
+                               FontAttributes="Bold"
+                               FontSize="14"
+                               LineBreakMode="TailTruncation"/>
+                    </HorizontalStackLayout>
+                    
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" RowDefinitions="Auto, *">
+
+            <Grid Grid.Row="0" ColumnDefinitions="*, *" BackgroundColor="#F4F4F6" Padding="10" Margin="10,0">
+                <Label Grid.Column="0" 
+                       Text="📅 HORARIOS" 
+                       HorizontalOptions="Center" 
+                       FontAttributes="Bold" 
+                       TextColor="#2C2C2E"/>
+                
+                <Label Grid.Column="1" 
+                       Text="📝 TAREAS" 
+                       HorizontalOptions="Center" 
+                       FontAttributes="Bold" 
+                       TextColor="#8E8E93"/> 
+            </Grid>
+
+            <CarouselView Loop="False" Grid.Row="1">
+                <CarouselView.ItemsSource>
+                    <x:Array Type="{x:Type View}">
+                        
+                        <Border StrokeShape="RoundRectangle 30"
+                            StrokeThickness="0"
+                            Margin="10"
+                            BackgroundColor="White">
+                            <Border.Shadow>
+                                <Shadow Brush="Black"
+                                    Offset="2,2"
+                                    Radius="5"
+                                    Opacity="0.5"/>
+                            </Border.Shadow>
+                           
+                            <Grid RowDefinitions="1*, 70">
+                                <CollectionView ItemsSource="{Binding BindingContext.ListaHorarios, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    x:Name="ListaHorariosCollection"
+                                    Grid.Row="0"
+                                    SelectionMode="Single"
+                                    SelectionChanged="ListaHorariosCollection_SelectionChanged">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Border StrokeShape="RoundRectangle 30"
+                                                    BackgroundColor="White"
+                                                    Padding="10"
+                                                    Margin="5"
+                                                    HeightRequest="100"
+                                                    StrokeThickness="0">
+                                                    <Border.Shadow>
+                                                        <Shadow Brush="Black"
+                                                            Offset="3,3"
+                                                            Radius="10"
+                                                            Opacity="0.5"/>
+                                                    </Border.Shadow>
+  
+                                                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="14">
+                                                        <VerticalStackLayout Grid.Column="0" 
+                                                                            VerticalOptions="Center" 
+                                                                            Spacing="2"
+                                                                            WidthRequest="75">
+                                                            <Label Text="{Binding HoraInicioFormateada}"
+                                                                FontAttributes="Bold"
+                                                                TextColor="#1D1D1F"
+                                                                FontSize="16" 
+                                                                HorizontalOptions="Center"/>
+                                                            <BoxView HeightRequest="1" 
+                                                                    BackgroundColor="#E5E5EA" 
+                                                                    HorizontalOptions="Fill" 
+                                                                    Margin="4,2"/>
+                                                            <Label Text="{Binding HoraFinFormateada}"
+                                                                TextColor="#8E8E93"
+                                                                FontSize="13"
+                                                                HorizontalOptions="Center"/>
+                                                        </VerticalStackLayout>
+
+                                                        <VerticalStackLayout Grid.Column="1" 
+                                                                            Spacing="6" 
+                                                                            VerticalOptions="Center">
+                                                            
+                                                            <Label Text="{Binding dia_semana}"
+                                                                FontAttributes="Bold"
+                                                                TextColor="#1D1D1F"
+                                                                FontSize="18"
+                                                                LineBreakMode="TailTruncation"/>
+
+                                                            <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                                                <Label Text="📍" FontSize="12" VerticalOptions="Center"/>
+                                                                <Label Text="{Binding aula, StringFormat='Aula: {0}'}"
+                                                                    TextColor="#666666"
+                                                                    FontAttributes="Italic"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"/>
+                                                            </HorizontalStackLayout>
+                                                        </VerticalStackLayout>
+
+                                                        <Border StrokeShape="RoundRectangle 30"
+                                                            StrokeThickness="0"
+                                                            Margin="10"
+                                                            Grid.Column="2"
+                                                            BackgroundColor="White">
+                                                            <Border.Shadow>
+                                                                <Shadow Brush="Black"
+                                                                    Offset="2,2"
+                                                                    Radius="5"
+                                                                    Opacity="0.5"/>
+                                                            </Border.Shadow>
+                                                            <Button x:Name="BtnEliminarHorarios"
+                                                                Clicked="BtnEliminarHorarios_Clicked"
+                                                                BackgroundColor="White"
+                                                                Text="🗑️"
+                                                                CommandParameter="{Binding .}"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <Border StrokeShape="RoundRectangle 30"
+                                    BackgroundColor="White"
+                                    WidthRequest="60"
+                                    Margin="5"
+                                    StrokeThickness="0"
+                                    HorizontalOptions="End"
+                                    Grid.Row="1">
+                                    <Border.Shadow>
+                                        <Shadow Brush="black"
+                                            Offset="3,3"
+                                            Radius="10"
+                                            Opacity="0.5"/>
+                                    </Border.Shadow>
+                            
+                                    <Button x:Name="BtnAgregarHorarios"
+                                        BackgroundColor="White"
+                                        Text="+"
+                                        BorderWidth="0"
+                                        FontSize="20"
+                                        TextColor="Black"
+                                        Clicked="BtnAgregarHorarios_Clicked"/>
+
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border StrokeShape="RoundRectangle 30"
+                            StrokeThickness="0"
+                            Margin="10"
+                            BackgroundColor="White">
+                            <Border.Shadow>
+                                <Shadow Brush="Black"
+                                    Offset="2,2"
+                                    Radius="5"
+                                    Opacity="0.5"/>
+                            </Border.Shadow>
+                           
+                            <Grid RowDefinitions="1*, 70">
+                                <CollectionView ItemsSource="{Binding BindingContext.ListaTareas, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    x:Name="ListaTareasCollection"
+                                    Grid.Row="0"
+                                    SelectionMode="Single"
+                                    SelectionChanged="ListaTareasCollection_SelectionChanged">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Border StrokeShape="RoundRectangle 30"
+                                                    BackgroundColor="White"
+                                                    Padding="10"
+                                                    Margin="5"
+                                                    HeightRequest="100"
+                                                    StrokeThickness="0">
+                                                    <Border.Shadow>
+                                                        <Shadow Brush="Black"
+                                                            Offset="3,3"
+                                                            Radius="10"
+                                                            Opacity="0.5"/>
+                                                    </Border.Shadow>
+  
+                                                    <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="14">
+                                                        <VerticalStackLayout Grid.Column="0" Spacing="4" VerticalOptions="Center">
+                                                            <Label Text="{Binding titulo}"
+                                                                FontAttributes="Bold"
+                                                                TextColor="#1D1D1F"
+                                                                FontSize="18"
+                                                                LineBreakMode="TailTruncation"/>
+                                                            
+                                                            <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                                                <Label Text="📅" FontSize="12" VerticalOptions="Center"/>
+                                                                <Label Text="{Binding fecha_entrega, StringFormat='Límite: {0:dd/MM/yyyy}'}"
+                                                                    TextColor="#FF3B30"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="13"
+                                                                    VerticalOptions="Center"/>
+                                                            </HorizontalStackLayout>
+                                                        </VerticalStackLayout>
+
+                                                        <Grid Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End">
+                                                            <CheckBox x:Name="CbCompletadoTareas"
+                                                                    IsChecked="{Binding completada}"
+                                                                    Color="#512BD4"
+                                                                    InputTransparent="True"/> 
+                                                            <Grid.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                                            </Grid.GestureRecognizers>
+                                                        </Grid>
+
+                                                        <Border StrokeShape="RoundRectangle 30"
+                                                            StrokeThickness="0"
+                                                            Margin="10"
+                                                            Grid.Column="2"
+                                                            BackgroundColor="White">
+                                                            <Border.Shadow>
+                                                                <Shadow Brush="Black"
+                                                                    Offset="2,2"
+                                                                    Radius="5"
+                                                                    Opacity="0.5"/>
+                                                            </Border.Shadow>
+                                                            <Button x:Name="BtnEliminarTareas"
+                                                                Clicked="BtnEliminarTareas_Clicked"
+                                                                BackgroundColor="White"
+                                                                Text="🗑️"
+                                                                CommandParameter="{Binding .}"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <Border StrokeShape="RoundRectangle 30"
+                                    BackgroundColor="White"
+                                    WidthRequest="60"
+                                    Margin="5"
+                                    StrokeThickness="0"
+                                    HorizontalOptions="End"
+                                    Grid.Row="1">
+                                    <Border.Shadow>
+                                        <Shadow Brush="black"
+                                            Offset="3,3"
+                                            Radius="10"
+                                            Opacity="0.5"/>
+                                    </Border.Shadow>
+                            
+                                    <Button x:Name="BtnAgregarTareas"
+                                        BackgroundColor="White"
+                                        Text="+"
+                                        BorderWidth="0"
+                                        FontSize="20"
+                                        TextColor="Black"
+                                        Clicked="BtnAgregarTareas_Clicked"/>
+
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                    </x:Array>
+                </CarouselView.ItemsSource>
+
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Content="{Binding .}"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        </Grid>
+
+        <Grid x:Name="PoputHorarios"
+            IsVisible="False"
+            Grid.RowSpan="3"
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                    
+            <Border BackgroundColor="#E6FFFFFF" 
+                StrokeThickness="1"
+                Stroke="#33FFFFFF"
+                StrokeShape="RoundRectangle 24"
+                WidthRequest="320"
+                Padding="20">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,15"
+                        Radius="25"
+                        Opacity="0.15"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Nuevo Horario" 
+                        FontSize="20" 
+                        FontAttributes="Bold" 
+                        TextColor="#1D1D1F" 
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,5"/>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                            StrokeThickness="1" 
+                            Stroke="#33000000" 
+                            BackgroundColor="#40FFFFFF"
+                            Padding="12,2">
+                        <Picker x:Name="pckDiaSemanaHorario" 
+                                Title="Selecciona el día..." 
+                                TextColor="Black"
+                                TitleColor="#666666">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Lunes</x:String>
+                                    <x:String>Martes</x:String>
+                                    <x:String>Miércoles</x:String>
+                                    <x:String>Jueves</x:String>
+                                    <x:String>Viernes</x:String>
+                                    <x:String>Sábado</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Hora de inicio" FontSize="12" TextColor="#666666" Margin="4,0,0,0"/>
+                            <Border StrokeShape="RoundRectangle 12" 
+                                    StrokeThickness="1" 
+                                    Stroke="#33000000" 
+                                    BackgroundColor="#40FFFFFF"
+                                    Padding="12,0" HeightRequest="45">
+                                <TimePicker x:Name="tmpHoraInicioHorario" TextColor="Black" VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Hora de fin" FontSize="12" TextColor="#666666" Margin="4,0,0,0"/>
+                            <Border StrokeShape="RoundRectangle 12" 
+                                    StrokeThickness="1" 
+                                    Stroke="#33000000" 
+                                    BackgroundColor="#40FFFFFF"
+                                    Padding="12,0" HeightRequest="45">
+                                <TimePicker x:Name="tmpHoraFinHorario" TextColor="Black" VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+                        
+                    </Grid>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                        StrokeThickness="1" 
+                        Stroke="#33000000" 
+                        BackgroundColor="#40FFFFFF"
+                        Padding="12,2">
+                        <Entry x:Name="txtAulaHorario" 
+                            Placeholder="Ej. Aula 101, Lab de Cómputo..." 
+                            Keyboard="Text"
+                            TextColor="Black"
+                            PlaceholderColor="#666666"/>
+                    </Border>                          
+
+                    <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="12" Margin="0,10,0,0">
+                                
+                        <Button Text="Cancelar" 
+                            x:Name="BtnCerrarPoputHorario"
+                            BackgroundColor="#1AFF3B30" 
+                            TextColor="#FF3B30"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="0"
+                            Clicked="BtnCerrarPoputHorario_Clicked"/>
+
+                        <Button Text="Guardar" 
+                            x:Name="BtnGuardarPoputHorario"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="1"
+                            Clicked="BtnGuardarPoputHorario_Clicked"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid> 
+
+        <Grid x:Name="PoputTareas"
+            IsVisible="False"
+            Grid.RowSpan="3"
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                    
+            <Border BackgroundColor="#E6FFFFFF" 
+                StrokeThickness="1"
+                Stroke="#33FFFFFF"
+                StrokeShape="RoundRectangle 24"
+                WidthRequest="320"
+                Padding="20">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,15"
+                        Radius="25"
+                        Opacity="0.15"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Nueva Tarea" 
+                        FontSize="20" 
+                        FontAttributes="Bold" 
+                        TextColor="#1D1D1F" 
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,5"/>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                        StrokeThickness="1" 
+                        Stroke="#33000000" 
+                        BackgroundColor="#40FFFFFF"
+                        Padding="12,2">
+                        <Entry x:Name="txtTituloTarea" 
+                            Placeholder="Título de la tarea..." 
+                            Keyboard="Text"
+                            TextColor="Black"
+                            PlaceholderColor="#666666"/>
+                    </Border>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                            StrokeThickness="1" 
+                            Stroke="#33000000" 
+                            BackgroundColor="#40FFFFFF"
+                            Padding="12,4"
+                            HeightRequest="90">
+                        <Editor x:Name="txtDescripcionTarea" 
+                                Placeholder="Descripción o notas adicionales..." 
+                                Keyboard="Text"
+                                TextColor="Black"
+                                PlaceholderColor="#666666"
+                                AutoSize="Disabled"/>
+                    </Border>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Fecha de entrega" FontSize="12" TextColor="#666666" Margin="4,0,0,0"/>
+                        <Border StrokeShape="RoundRectangle 12" 
+                                StrokeThickness="1" 
+                                Stroke="#33000000" 
+                                BackgroundColor="#40FFFFFF"
+                                Padding="12,0" 
+                                HeightRequest="45">
+                            <DatePicker x:Name="dtpFechaEntregaTarea" 
+                                        TextColor="Black" 
+                                        Format="dd/MM/yyyy"
+                                        VerticalOptions="Center"/>
+                        </Border>
+                    </VerticalStackLayout>                         
+
+                    <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="12" Margin="0,10,0,0">
+                                
+                        <Button Text="Cancelar" 
+                            x:Name="BtnCerrarPoputTareas"
+                            BackgroundColor="#1AFF3B30" 
+                            TextColor="#FF3B30"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="0"
+                            Clicked="BtnCerrarPoputTareas_Clicked"/>
+
+                        <Button Text="Guardar" 
+                            x:Name="BtnGuardarPoputTareas"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="1"
+                            Clicked="BtnGuardarPoputTareas_Clicked"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid> 
+
+        <Grid x:Name="PoputVerTarea"
+            IsVisible="False"
+            Grid.RowSpan="3"
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                    
+            <Border BackgroundColor="#E6FFFFFF" 
+                    StrokeThickness="1"
+                    Stroke="#33FFFFFF"
+                    StrokeShape="RoundRectangle 24"
+                    WidthRequest="320"
+                    Padding="20">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0,15"
+                            Radius="25"
+                            Opacity="0.15"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="Detalle de la Tarea" 
+                        FontSize="14" 
+                        FontAttributes="Bold" 
+                        TextColor="#007AFF" 
+                        HorizontalOptions="Center"/>
+
+                    <Label x:Name="lblVerTituloTarea"
+                        Text="Título de la Tarea de Ejemplo" 
+                        FontSize="22" 
+                        FontAttributes="Bold" 
+                        TextColor="#1D1D1F" 
+                        HorizontalOptions="Start"
+                        LineBreakMode="WordWrap"/>
+
+                    <ScrollView HeightRequest="100">
+                        <Label x:Name="lblVerDescripcionTarea"
+                            Text="Aquí se mostrará toda la descripción detallada o las notas adicionales que el usuario haya guardado previamente en la tarea." 
+                            FontSize="15" 
+                            TextColor="#4A4A4A" 
+                            LineBreakMode="WordWrap"/>
+                    </ScrollView>
+
+                    <BoxView Color="#1A000000" HeightRequest="1" HorizontalOptions="Fill" Margin="0,4"/>
+
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                        <Label Text="📅" FontSize="16" VerticalOptions="Center"/>
+                        <VerticalStackLayout>
+                            <Label Text="Fecha de entrega" FontSize="11" TextColor="#666666"/>
+                            <Label x:Name="lblVerFechaEntrega" Text="25/12/2026" FontSize="14" FontAttributes="Bold" TextColor="#1D1D1F"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>                         
+
+                    <Grid ColumnSpacing="12" Margin="0,8,0,0">
+                                
+                        <Button Text="Cerrar" 
+                                x:Name="BtnCerrarVerTarea"
+                                BackgroundColor="#1A8E8E93" 
+                                TextColor="#8E8E93"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="45"
+                                Margin="10"
+                                Clicked="BtnCerrarVerTarea_Clicked"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

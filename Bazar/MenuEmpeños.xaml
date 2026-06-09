@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Bazar.MenuEmpeños"
+             Shell.NavBarIsVisible="False">
+
+    <Grid BackgroundColor="White"
+        RowDefinitions="Auto,1*"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
+        
+        <Border BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 0"
+                Padding="15,10"
+                Grid.Row="0">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="0,3" Radius="10" Opacity="0.08"/>
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="10">
+
+                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="12">
+
+                    <Border Grid.Column="0"
+                            BackgroundColor="#007AFF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 25"
+                            WidthRequest="45"
+                            HeightRequest="45"
+                            VerticalOptions="Center">
+                        <Label Text="👤" FontSize="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="{Binding Cliente.nombre}"
+                            FontAttributes="Bold"
+                            TextColor="#1D1D1F"
+                            FontSize="17"/>
+                        <HorizontalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="4">
+                                <Label Text="📋" FontSize="11" VerticalOptions="Center"/>
+                                <Label Text="{Binding Cliente.identificacion}"
+                                    TextColor="#666666" FontSize="12" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="4">
+                                <Label Text="📞" FontSize="11" VerticalOptions="Center"/>
+                                <Label Text="{Binding Cliente.telefono}"
+                                    TextColor="#007AFF" FontSize="12" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <BoxView HeightRequest="1" BackgroundColor="#E5E5EA"/>
+
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="{Binding Empeño.descripcion_articulo}"
+                            FontAttributes="Bold"
+                            TextColor="#1D1D1F"
+                            FontSize="15"
+                            LineBreakMode="TailTruncation"/>
+                        <HorizontalStackLayout Spacing="4">
+                            <Label Text="🏷️" FontSize="11" VerticalOptions="Center"/>
+                            <Label Text="{Binding Empeño.categoria}"
+                                TextColor="#666666" FontSize="12" FontAttributes="Italic"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="3">
+                        <Border BackgroundColor="{Binding Empeño.EstadoColor}"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="8,3">
+                            <Label Text="{Binding Empeño.estado}"
+                                TextColor="White" FontSize="11"
+                                FontAttributes="Bold" HorizontalOptions="Center"/>
+                        </Border>
+                        <Label Text="{Binding Empeño.monto_prestado, StringFormat='${0:F2}'}"
+                            FontAttributes="Bold" TextColor="#1D1D1F"
+                            FontSize="16" HorizontalOptions="End"/>
+                        <Label Text="{Binding Empeño.fecha_vence, StringFormat='Vence: {0:dd/MM/yy}'}"
+                            TextColor="#FF3B30" FontSize="11" HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+
+                </Grid>
+ 
+                <VerticalStackLayout Spacing="4">
+                    <ProgressBar Progress="{Binding Empeño.ProgresoAbono}"
+                                ProgressColor="#34C759"
+                                BackgroundColor="#E5E5EA"
+                                HeightRequest="5"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0"
+                            Text="{Binding Empeño.monto_abonado, StringFormat='Abonado: ${0:F2}'}"
+                            TextColor="#34C759" FontSize="12"/>
+                        <Label Grid.Column="1"
+                            Text="{Binding Empeño.monto_prestado, StringFormat='Total: ${0:F2}'}"
+                            TextColor="#8E8E93" FontSize="12"/>
+                    </Grid>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.Row="1" RowDefinitions="1*,70">
+            <CollectionView ItemsSource="{Binding ListaPagos}"
+                x:Name="ListaPagosCollection"
+                Grid.Row="0"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Border StrokeShape="RoundRectangle 30"
+                                BackgroundColor="White"
+                                Padding="10"
+                                Margin="5"
+                                HeightRequest="100"
+                                StrokeThickness="0">
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                            Offset="3,3"
+                                            Radius="10"
+                                            Opacity="0.5"/>
+                                    </Border.Shadow>
+
+                                    <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="12">
+
+                                        <Border Grid.Column="0"
+                                                BackgroundColor="#F0F7FF"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 12"
+                                                WidthRequest="50"
+                                                HeightRequest="50"
+                                                VerticalOptions="Center">
+                                            <VerticalStackLayout VerticalOptions="Center" Spacing="0">
+                                                <Label Text="{Binding fecha_pago, StringFormat='{0:dd}'}"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#007AFF"
+                                                    FontSize="18"
+                                                    HorizontalOptions="Center"/>
+                                                <Label Text="{Binding fecha_pago, StringFormat='{0:MMM}'}"
+                                                    TextColor="#8E8E93"
+                                                    FontSize="10"
+                                                    HorizontalOptions="Center"/>
+                                            </VerticalStackLayout>
+                                        </Border>
+
+                                        <VerticalStackLayout Grid.Column="1"
+                                                            Spacing="4"
+                                                            VerticalOptions="Center">
+                                            <Label Text="{Binding concepto}"
+                                                FontAttributes="Bold"
+                                                TextColor="#1D1D1F"
+                                                FontSize="15"
+                                                LineBreakMode="TailTruncation"/>
+                                            <Label Text="{Binding fecha_pago, StringFormat='{0:dd/MM/yyyy}'}"
+                                                TextColor="#8E8E93"
+                                                FontSize="12"/>
+                                        </VerticalStackLayout>
+
+                                        <Label Grid.Column="2"
+                                            Text="{Binding monto, StringFormat='${0:F2}'}"
+                                            FontAttributes="Bold"
+                                            TextColor="#34C759"
+                                            FontSize="16"
+                                            VerticalOptions="Center"/>
+
+                                        <Border StrokeShape="RoundRectangle 30"
+                                            StrokeThickness="0"
+                                            Margin="10"
+                                            Grid.Column="3"
+                                            BackgroundColor="White">
+                                            <Border.Shadow>
+                                                <Shadow Brush="Black"
+                                                    Offset="2,2"
+                                                    Radius="5"
+                                                    Opacity="0.5"/>
+                                            </Border.Shadow>
+                                            <Button x:Name="BtnEliminar"
+                                                    Clicked="BtnEliminar_Clicked"
+                                                    BackgroundColor="White"
+                                                    Text="🗑️"
+                                                    CommandParameter="{Binding .}"/>
+                                        </Border>
+                                    </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border StrokeShape="RoundRectangle 30"
+                BackgroundColor="White"
+                WidthRequest="60"
+                Margin="5"
+                StrokeThickness="0"
+                HorizontalOptions="End"
+                Grid.Row="1">
+                <Border.Shadow>
+                    <Shadow Brush="black"
+                        Offset="3,3"
+                        Radius="10"
+                        Opacity="0.5"/>
+                </Border.Shadow>
+                         
+                <Button x:Name="BtnAgregar"
+                    BackgroundColor="White"
+                    Text="+"
+                    BorderWidth="0"
+                    FontSize="20"
+                    TextColor="Black"
+                    Clicked="BtnAgregar_Clicked"/>
+
+            </Border>
+        </Grid> 
+
+        <Grid x:Name="PopupPagos"
+            IsVisible="False"
+            Grid.RowSpan="2"
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                    
+            <Border BackgroundColor="#E6FFFFFF" 
+                StrokeThickness="1"
+                Stroke="#33FFFFFF"
+                StrokeShape="RoundRectangle 24"
+                WidthRequest="320"
+                Padding="20">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,15"
+                        Radius="25"
+                        Opacity="0.15"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Nuevo Pago" 
+                        FontSize="20" 
+                        FontAttributes="Bold" 
+                        TextColor="#1D1D1F" 
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,5"/>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                            StrokeThickness="1" 
+                            Stroke="#33000000" 
+                            BackgroundColor="#40FFFFFF"
+                            Padding="12,2">
+                        <Entry x:Name="txtMontoPago" 
+                            Placeholder="Monto a abonar..." 
+                            Keyboard="Numeric"
+                            TextColor="Black"
+                            PlaceholderColor="#666666"/>
+                    </Border>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                            StrokeThickness="1" 
+                            Stroke="#33000000" 
+                            BackgroundColor="#40FFFFFF"
+                            Padding="12,2">
+                        <Entry x:Name="txtConceptoPago" 
+                            Placeholder="Concepto..." 
+                            Keyboard="Text"
+                            TextColor="Black"
+                            PlaceholderColor="#666666"/>
+                    </Border>
+
+                    <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="12" Margin="0,10,0,0">
+                                
+                        <Button Text="Cancelar" 
+                            x:Name="BtnCerrarPopupPago"
+                            BackgroundColor="#1AFF3B30" 
+                            TextColor="#FF3B30"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="0"
+                            Clicked="BtnCerrarPopupPago_Clicked"/>
+
+                        <Button Text="Guardar" 
+                            x:Name="BtnGuardarPopupPago"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="1"
+                            Clicked="BtnGuardarPopupPago_Clicked"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

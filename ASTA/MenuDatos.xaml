@@ -20,17 +20,17 @@
 
         <Grid Grid.Row="1" RowDefinitions="1*,70">
             <CollectionView ItemsSource="{Binding ListaMaterias}"
-                x:Name="ListaPrestamosCol"
+                x:Name="ListaMateriasCollection"
                 Grid.Row="0"
                 SelectionMode="Single"
-                SelectionChanged="ListaPrestamosCol_SelectionChanged">
+                SelectionChanged="ListaMateriasCollection_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Border StrokeShape="RoundRectangle 30"
                                 BackgroundColor="White"
                                 Padding="10"
-                                Margin="10"
+                                Margin="5"
                                 HeightRequest="100"
                                 StrokeThickness="0">
                                     <Border.Shadow>
@@ -40,55 +40,28 @@
                                             Opacity="0.5"/>
                                     </Border.Shadow>
 
-                                    <Grid ColumnDefinitions="90, 1*, 1*, Auto">
-                                        <Border Grid.Column="0"
-                                            StrokeShape="RoundRectangle 16"
-                                            StrokeThickness="0"
-                                            HeightRequest="80"
-                                            WidthRequest="80"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Center">
-                                            <Image Source="{Binding url}"
-                                                Aspect="AspectFill"/>
-                                        </Border>
+                                    <Grid ColumnDefinitions="1*, Auto">
 
-                                        <VerticalStackLayout Grid.Column="1" 
+                                        <VerticalStackLayout Grid.Column="0" 
                                             Spacing="4" 
                                             VerticalOptions="Center"
                                             HorizontalOptions="Start">
                                                 
-                                            <Label Text="{Binding objeto}"
+                                            <Label Text="{Binding nombre}"
                                                 FontAttributes="Bold"
                                                 TextColor="#1D1D1F"
                                                 FontSize="18"
                                                 LineBreakMode="TailTruncation"/>
 
-                                            <Label Text="{Binding persona, StringFormat='Persona: {0}'}"
+                                            <Label Text="{Binding profesor, StringFormat='Profesor: {0}'}"
                                                 TextColor="#666666"
                                                 FontSize="14"/>
-                                        </VerticalStackLayout>
-
-                                        <VerticalStackLayout Grid.Column="2" 
-                                            Spacing="4" 
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Start">
-
-                                            <Label Text="{Binding estado, StringFormat='Estado: {0}'}"
-                                                TextColor="#666666"
-                                                FontSize="14"/>
-
-                                            <Label Text="{Binding devolucion, StringFormat='Devolucion:{0:dd/MM/yyyy}'}"
-                                                TextColor="#666666"
-                                                FontAttributes="Bold"
-                                                FontSize="13"
-                                                VerticalOptions="Center"/>
-                                                
                                         </VerticalStackLayout>
 
                                         <Border StrokeShape="RoundRectangle 30"
                                             StrokeThickness="0"
                                             Margin="10"
-                                            Grid.Column="3"
+                                            Grid.Column="1"
                                             BackgroundColor="White">
                                             <Border.Shadow>
                                                 <Shadow Brush="Black"
@@ -132,7 +105,93 @@
                     Clicked="BtnAgregar_Clicked"/>
 
             </Border>
-        </Grid>       
+        </Grid>     
+
+        <Grid x:Name="Poput"
+            IsVisible="False"
+            Grid.RowSpan="2"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                    
+            <Border BackgroundColor="#E6FFFFFF" 
+                StrokeThickness="1"
+                Stroke="#33FFFFFF"
+                StrokeShape="RoundRectangle 24"
+                WidthRequest="320"
+                Padding="20">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,15"
+                        Radius="25"
+                        Opacity="0.15"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Nueva Materia" 
+                        FontSize="20" 
+                        FontAttributes="Bold" 
+                        TextColor="#1D1D1F" 
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,5"/>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                        StrokeThickness="1" 
+                        Stroke="#33000000" 
+                        BackgroundColor="#40FFFFFF"
+                        Padding="12,2">
+
+                        <Entry x:Name="txtNombreMateria" 
+                            Placeholder="Nombre de la Materia" 
+                            Keyboard="Chat"
+                            TextColor="Black"
+                            PlaceholderColor="#666666"/>
+
+                    </Border>
+
+                    <Border StrokeShape="RoundRectangle 12" 
+                        StrokeThickness="1" 
+                        Stroke="#33000000" 
+                        BackgroundColor="#40FFFFFF"
+                        Padding="12,2">
+
+                        <Entry x:Name="txtNombreProfesor" 
+                            Placeholder="Nombre del Profesor" 
+                            Keyboard="Chat"
+                            TextColor="Black"
+                            PlaceholderColor="#666666"/>
+
+                    </Border>                               
+
+                    <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="12" Margin="0,10,0,0">
+                                
+                        <Button Text="Cancelar" 
+                            x:Name="BtnCerrarPoput"
+                            BackgroundColor="#1AFF3B30" 
+                            TextColor="#FF3B30"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="0"
+                            Clicked="BtnCerrarPoput_Clicked"/>
+
+                        <Button Text="Guardar" 
+                            x:Name="BtnGuardarPoput"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="1"
+                            Clicked="BtnGuardarPoput_Clicked"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>  
 
     </Grid>
 
