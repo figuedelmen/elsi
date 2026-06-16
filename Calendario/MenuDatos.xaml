@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calendario.MenuDatos"
+             x:Name="thisPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid BackgroundColor="White"
+        RowDefinitions="Auto, Auto, 1*"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
+        
+        <HorizontalStackLayout Grid.Row="0" VerticalOptions="Center"
+            HorizontalOptions="Start">
+            <Label Text="Calendario"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="25"
+                Margin="10"/>
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Padding="10" Grid.Row="1">
+
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Text="◀" 
+                    Clicked="MesAnterior_Clicked" 
+                    BackgroundColor="Transparent" 
+                    TextColor="black"/>
+                <Label x:Name="LblMes" 
+                    Grid.Column="1" 
+                    HorizontalTextAlignment="Center"
+                    FontSize="18" 
+                    FontAttributes="Bold" 
+                    TextColor="black" 
+                    VerticalTextAlignment="Center"/>
+                <Button Grid.Column="2" 
+                    Text="▶" 
+                    Clicked="MesSiguiente_Clicked" 
+                    BackgroundColor="Transparent" 
+                    TextColor="black"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*" Margin="0,10,0,0">
+                <Label Grid.Column="0" Text="D" HorizontalTextAlignment="Center" TextColor="#D93025" FontSize="12" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="L" HorizontalTextAlignment="Center" TextColor="#70757A" FontSize="12"/>
+                <Label Grid.Column="2" Text="M" HorizontalTextAlignment="Center" TextColor="#70757A" FontSize="12"/>
+                <Label Grid.Column="3" Text="M" HorizontalTextAlignment="Center" TextColor="#70757A" FontSize="12"/>
+                <Label Grid.Column="4" Text="J" HorizontalTextAlignment="Center" TextColor="#70757A" FontSize="12"/>
+                <Label Grid.Column="5" Text="V" HorizontalTextAlignment="Center" TextColor="#70757A" FontSize="12"/>
+                <Label Grid.Column="6" Text="S" HorizontalTextAlignment="Center" TextColor="#70757A" FontSize="12"/>
+            </Grid>
+            <CollectionView ItemsSource="{Binding DiasDelMes}"
+                            HeightRequest="310" SelectionMode="None" Margin="0,6,0,0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="7"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout IsVisible="{Binding EsVisible}"
+                                            Spacing="3" HeightRequest="44"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                            <Border WidthRequest="34" HeightRequest="34"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 17"
+                                    BackgroundColor="{Binding Fondo}"
+                                    HorizontalOptions="Center">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="DiaTapped"
+                                                        CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+                                <Label Text="{Binding Numero}" FontSize="14"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    TextColor="{Binding TextoColor}"/>
+                            </Border>
+                            <HorizontalStackLayout Spacing="3" HorizontalOptions="Center"
+                                                IsVisible="{Binding TienePuntos}"
+                                                BindableLayout.ItemsSource="{Binding Puntos}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <BoxView WidthRequest="5" HeightRequest="5"
+                                                CornerRadius="3" Color="{Binding .}"/>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        <Grid RowDefinitions="1*, 70" Grid.Row="2">
+            <CollectionView ItemsSource="{Binding ListaEventos}"
+                x:Name="ListaEventosCollection"
+                Grid.Row="0"
+                SelectionMode="Single"
+                SelectionChanged="ListaEventosCollection_SelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border StrokeShape="RoundRectangle 30"
+                                    BackgroundColor="White"
+                                    Padding="10"
+                                    Margin="5"
+                                    HeightRequest="100"
+                                    StrokeThickness="0">
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                            Offset="3,3"
+                                            Radius="10"
+                                            Opacity="0.5"/>
+                                    </Border.Shadow>
+                                    
+                                    <Grid ColumnDefinitions="6, *, Auto" ColumnSpacing="0">
+
+                                        <BoxView Grid.Column="0"
+                                                BackgroundColor="{Binding color}"
+                                                CornerRadius="30,0,0,30"/>
+
+                                        <VerticalStackLayout Grid.Column="1"
+                                                            Spacing="4"
+                                                            VerticalOptions="Center"
+                                                            Padding="12,8">
+
+                                            <Grid ColumnDefinitions="*, Auto">
+                                                <Label Text="{Binding titulo}"
+                                                    FontSize="15"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#1D1D1F"
+                                                    LineBreakMode="TailTruncation"
+                                                    VerticalOptions="Center"/>
+
+                                                <Border Grid.Column="1"
+                                                        BackgroundColor="#F2F2F7"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 8"
+                                                        Padding="6,2">
+                                                    <Label Text="{Binding hora, StringFormat='{0:hh\\:mm}'}"
+                                                        FontSize="12"
+                                                        TextColor="#8E8E93"
+                                                        VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+
+                                            <Label Text="{Binding descripcion}"
+                                                FontSize="12"
+                                                TextColor="#8E8E93"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"/>
+
+                                            <HorizontalStackLayout Spacing="4">
+                                                <Label Text="📅" FontSize="11" VerticalOptions="Center"/>
+                                                <Label Text="{Binding fecha, StringFormat='{0:dddd dd MMM}'}"
+                                                    FontSize="11"
+                                                    TextColor="#AEAEB2"
+                                                    VerticalOptions="Center"/>
+                                            </HorizontalStackLayout>
+
+                                        </VerticalStackLayout>
+
+                                        <Border StrokeShape="RoundRectangle 30"
+                                            StrokeThickness="0"
+                                            Margin="10"
+                                            Grid.Column="3"
+                                            BackgroundColor="White">
+                                            <Border.Shadow>
+                                                <Shadow Brush="Black"
+                                                    Offset="2,2"
+                                                    Radius="5"
+                                                    Opacity="0.5"/>
+                                            </Border.Shadow>
+                                                <Button x:Name="BtnEliminarEventos"
+                                                    Clicked="BtnEliminarEventos_Clicked"
+                                                    BackgroundColor="White"
+                                                    Text="🗑️"
+                                                    CommandParameter="{Binding .}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border StrokeShape="RoundRectangle 30"
+                BackgroundColor="White"
+                WidthRequest="60"
+                Margin="5"
+                StrokeThickness="0"
+                HorizontalOptions="End"
+                Grid.Row="1">
+                <Border.Shadow>
+                    <Shadow Brush="black"
+                        Offset="3,3"
+                        Radius="10"
+                        Opacity="0.5"/>
+                </Border.Shadow>
+                            
+                    <Button x:Name="BtnAgregarEventos"
+                        BackgroundColor="White"
+                        Text="+"
+                        BorderWidth="0"
+                        FontSize="20"
+                        TextColor="Black"
+                        Clicked="BtnAgregarEventos_Clicked"/>
+
+            </Border>
+        </Grid>
+
+        <Grid x:Name="Popup"
+            IsVisible="False"
+            Grid.RowSpan="3"
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                    
+            <Border BackgroundColor="#E6FFFFFF" 
+                StrokeThickness="1"
+                Stroke="#33FFFFFF"
+                StrokeShape="RoundRectangle 24"
+                WidthRequest="320"
+                Padding="20">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,15"
+                        Radius="25"
+                        Opacity="0.15"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Nuevo Evento" 
+                        FontSize="20" 
+                        FontAttributes="Bold" 
+                        TextColor="#1D1D1F" 
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,5"/>
+
+                    <Border StrokeShape="RoundRectangle 10" 
+                        StrokeThickness="1"
+                        Stroke="#E0E0E0" 
+                        BackgroundColor="#F8F8F8" 
+                        Padding="14,4">
+                        <Entry x:Name="txtTitulo" 
+                            Placeholder="Título"
+                            TextColor="#1D1D1F" 
+                            PlaceholderColor="#AEAEB2"/>
+                    </Border>
+
+                    <Border StrokeShape="RoundRectangle 10" 
+                        StrokeThickness="1"
+                        Stroke="#E0E0E0" 
+                        BackgroundColor="#F8F8F8" 
+                        Padding="14,4">
+                        <Entry x:Name="txtDescripcion" 
+                            Placeholder="Descripción"
+                            TextColor="#1D1D1F" 
+                            PlaceholderColor="#AEAEB2"/>
+                    </Border>
+
+                    <Border StrokeShape="RoundRectangle 10" 
+                        StrokeThickness="1"
+                        Stroke="#E0E0E0" 
+                        BackgroundColor="#F8F8F8" 
+                        Padding="14,0">
+                        <DatePicker x:Name="dpFecha"
+                                    TextColor="#1D1D1F"
+                                    MinimumDate="01/01/2000"/>
+                    </Border>
+
+                    <Border StrokeShape="RoundRectangle 10" 
+                        StrokeThickness="1"
+                        Stroke="#E0E0E0" 
+                        BackgroundColor="#F8F8F8" 
+                        Padding="14,0">
+                        <TimePicker x:Name="tpHora"
+                                    TextColor="#1D1D1F"
+                                    Format="HH:mm"/>
+                    </Border>
+
+                    <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="12" Margin="0,10,0,0">
+                                
+                        <Button Text="Cancelar" 
+                            x:Name="BtnCerrarPopup"
+                            BackgroundColor="#1AFF3B30" 
+                            TextColor="#FF3B30"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="0"
+                            Clicked="BtnCerrarPopup_Clicked"/>
+
+                        <Button Text="Guardar" 
+                            x:Name="BtnGuardarPopup"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Grid.Column="1"
+                            Clicked="BtnGuardarPopup_Clicked"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

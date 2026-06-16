@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Proyecto1_api_NL15_47.Data;

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calendario.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid IgnoreSafeArea="true">
+
+        <Image Source="noche.jpg"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+
+        <Grid VerticalOptions="Center"
+            HorizontalOptions="Center" 
+            Padding="30">
+ 
+            <Border BackgroundColor="#80000000"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 30"
+                WidthRequest="300"
+                HeightRequest="350">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,5"
+                        Radius="10"
+                        Opacity="0.5"/>
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="25" Padding="25" VerticalOptions="Center">
+                     <Label Text="INICIO DE SESION"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        TextColor="White"/>
+
+                    <Entry x:Name="TxtNombre"
+                        Keyboard="Chat"
+                        Placeholder="Nombre"
+                        TextColor="White"/>
+
+                    <Entry x:Name="TxtContraseña"
+                        Keyboard="Password"
+                        Placeholder="Contraseña"
+                        TextColor="White"/>
+
+                    <Button x:Name="BtnInicio"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        TextColor="White"
+                        Text="Iniciar Sesión"
+                        Clicked="BtnInicio_Clicked"/>
+                </VerticalStackLayout>
+
+            </Border>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>
